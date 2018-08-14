@@ -1,0 +1,47 @@
+<% include ../partials/header %>
+
+    <div class="row">
+        <div class="col-sm-4">
+            <ul class="list-group">
+                <li class="list-group-item">Item 1</li>
+                <li class="list-group-item">Item 2</li>
+                <li class="list-group-item">Item 3</li>
+                <li class="list-group-item">Item 4</li>
+                <li class="list-group-item">Item 5</li>
+            </ul>
+        </div>
+        <div class="col-sm-8">
+            <div class="card text-center">
+                <div class="card-header">Featured</div>
+                <div class="card-body">
+                    <h5 class="card-title"><%= game.name %></h5>
+                    <p class="card-text"><%= game.description %></p>
+                    <a href="/games/<%= game._id %>/edit" class="btn btn-warning">Edit</a>
+                    <form class="delete-form" action="/games/<%= game._id %>?_method=DELETE" method="POST">
+                        <button class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
+                <div class="card-footer text-muted">2 days ago</div>
+            </div>
+        </div>
+    </div>
+    <div class="text-right">
+        <a class="btn btn-success" href="/games/<%= game._id %>/comments/new">Add New Comment</a>
+    </div>
+    <hr>
+    <% game.comments.forEach(function(comment) { %>
+    <div class="row">
+        <div class="col-12">
+            <span class="pull-right"><%= comment.createdAt %></span>
+            <p>
+                <%= comment.text %>
+            </p>
+            <a class="btn btn-xs btn-warning" href="/games/<%= game._id %>/comments/<%= comment._id %>/edit">Edit</a>
+            <form class="delete-form" action="/games/<%= game._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
+                <input class="btn btn-xs btn-danger" type="submit" value="Delete">
+            </form>
+        </div>
+    </div>
+    <% }); %>
+    
+<% include ../partials/footer %>

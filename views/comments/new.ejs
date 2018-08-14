@@ -1,0 +1,17 @@
+<% include ../partials/header %>
+
+<div class="row">
+    <div class="col-10 col-md-8 col-lg-6 form-new">
+        <h1 class="text-center">Add a comment to <%= game.name %></h1>
+        <form action="/games/<%= game._id %>/comments" method="POST">
+            <div class="form-group">
+                <label for="comment">Comment:</label>
+                <input class="form-control" type="text" name="comment[text]" id="comment" placeholder="Your comment..." autofocus/>
+            </div>
+            <input class="btn btn-primary btn-block" type="submit" value="Submit"/>
+        </form>
+        <a href="/games/<%= game._id %>">Go Back</a>
+    </div>
+</div>
+
+<% include ../partials/footer %>

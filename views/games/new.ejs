@@ -1,0 +1,33 @@
+<% include ../partials/header %>
+
+<div class="row">
+    <div class="col-10 col-md-8 col-lg-6 form-new">
+        <h1 class="text-center">Add a new game</h1>
+        <form action="/games" method="POST">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input class="form-control" type="text" name="game[name]" id="name" placeholder="Name of game" autofocus/>
+            </div>
+            <div class="form-group">
+                <label for="desc">Description:</label>
+                <input class="form-control" type="text" name="game[description]" id="desc" placeholder="Description"/>
+            </div>
+            <div class="form-group">
+                <label for="loc">Location:</label>
+                <input class="form-control" type="text" name="game[location]" id="loc" placeholder="Location"/>
+            </div>
+            <div class="form-group">
+                <label for="addr">Address:</label>
+                <input class="form-control" type="text" name="game[address]" id="addr" placeholder="Address"/>
+            </div>
+            <div class="form-group">
+                <label for="date">Date of game:</label>
+                <input class="form-control" type="date" name="game[date]" placeholder="Date"/>
+
+            <input class="btn btn-primary btn-block" type="submit" value="Submit"/>
+        </form>
+        <a href="/games">Go Back</a>
+    </div>
+</div>
+
+<% include ../partials/footer %>

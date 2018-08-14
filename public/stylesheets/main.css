@@ -1,0 +1,16 @@
+.img-brand {
+    width: 30px;
+    height: 30px;
+}
+
+.form-new {
+    margin: 2.5em auto;
+}
+
+.delete-form {
+    display: inline;
+}
+
+.card {
+    margin-bottom: 1.5rem;
+}

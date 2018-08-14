@@ -1,0 +1,25 @@
+<% include ../partials/header %>
+
+    <div class="jumbotron">
+        <h1 class="display-4">Welcome to Play!</h1>
+        <p class="lead">Come check out the games we have coming up!</p>
+        <hr class="my-4">
+        <p>Feel free to schedule your own game and invite others to join!</p>
+        <a class="btn btn-primary btn-lg" href="/games/new" role="button">Schedule a new game</a>
+    </div>
+    
+    <div class="row">
+        <% games.forEach(function(game) { %>
+        <div class="col-12 col-md-4 col-lg-3 d-flex align-items-stretch flex-wrap">
+            <div class="card flex-sm-fill">
+                <div class="card-body">
+                    <h5 class="card-title"><%= game.name %></h5>
+                    <p class="card-text"><%= game.description %></p>
+                    <a href="/games/<%= game._id %>" class="btn btn-primary">More info</a>
+                </div>
+            </div>
+        </div>
+        <% }); %>
+    </div>
+
+<% include ../partials/footer %>
