@@ -9,7 +9,16 @@ import Comment  from "../models/comment";
 
 // Root route
 router.get("/", (req, res) => {
-    res.render("landing");
+    // Get all games from db
+    Game.find({}, (err, allGames) => {
+        if (err) {
+            console.log(err);
+            req.flash("error", "Something went wrong.  Please try again.");
+            res.redirect("/");
+        } else {
+            res.render("landing", { games: allGames });
+        }
+    });
 });
 
 // =====================
