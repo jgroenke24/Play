@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Play!</title>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+        <link rel="stylesheet" href="/stylesheets/reset.css"/>
+        <link rel="stylesheet" href="/stylesheets/dash.css"/>
+    </head>
+    <body>
+        <nav class="primary-nav">
+            <ul>
+                <li><a class="active-link" href="#"><i class="fas fa-home"></i><span>Home</span></a></li>
+                <li><a href="#"><div class="add-circle"><i class="fas fa-plus"></i></div><span>New</span></a></li>
+                <li><a href="#"><i class="far fa-user-circle"></i><span>Profile</span></a></li>
+            </ul>
+        </nav>
+        <header class="primary-header">
+            <h1>Play!</h1>
+        </header>
+        <main>
+            
+            <!--Games Section-->
+            <section class="container">
+				<h2>Upcoming Games...</h2>
+				<div class="scroll-wrapper">
+					<% games.forEach((game) => { %>
+					<div class="schedule-box">
+						<img src="/images/christian-widell-101891-unsplash.jpg" alt="soccer field">
+						<div class="cal-leaf">
+							<span class="month">Aug</span>
+							<span class="day">9</span>
+						</div>
+						<div class="schedule-text">
+							<h3><%= game.name %></h3>
+							<h4><%= game.location %></h4>
+							<datetime><%= game.date %></datetime>
+						</div>
+					</div>
+					<% }); %>
+				</div>
+		    </section>
+            
+            <!--Leagues Section-->
+            <section class="container">
+                <h2>Available leagues...</h2>
+				<div class="scroll-wrapper">
+					<% games.forEach((game) => { %>
+					<div class="schedule-box">
+						<img src="/images/christian-widell-101891-unsplash.jpg" alt="soccer field">
+						<div class="cal-leaf">
+							<span class="month">Aug</span>
+							<span class="day">9</span>
+						</div>
+						<div class="schedule-text">
+							<h3><%= game.name %></h3>
+							<h4><%= game.location %></h4>
+							<datetime><%= game.date %></datetime>
+						</div>
+					</div>
+					<% }); %>
+				</div>
+            </section>
+            
+        </main>
+    </body>
+</html>

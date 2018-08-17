@@ -21,6 +21,19 @@ router.get("/", (req, res) => {
     });
 });
 
+router.get("/dashboard", (req, res) => {
+    // Get all games from db
+    Game.find({}, (err, allGames) => {
+        if (err) {
+            console.log(err);
+            req.flash("error", "Something went wrong.  Please try again.");
+            res.redirect("/");
+        } else {
+            res.render("dashboard", { games: allGames });
+        }
+    });
+});
+
 // =====================
 // AUTHENTICATION ROUTES
 // =====================
