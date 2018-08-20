@@ -1,3 +1,4 @@
+<% const monthArray = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]; %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -10,12 +11,17 @@
         <link rel="stylesheet" href="/stylesheets/dash.css"/>
     </head>
     <body>
-        <nav class="primary-nav">
-            <ul>
-                <li><a class="active-link" href="#"><i class="fas fa-home"></i><span>Home</span></a></li>
-                <li><a href="#"><div class="add-circle"><i class="fas fa-plus"></i></div><span>New</span></a></li>
-                <li><a href="#"><i class="far fa-user-circle"></i><span>Profile</span></a></li>
-            </ul>
+        <nav id="mobile-nav">
+        	<div class="primary-nav">
+	            <ul>
+	                <li><a class="active-link" href="#"><i class="fas fa-home"></i></a></li>
+	                <li><div id="add-all" class="add-item"><div class="add-circle add-all-circle"><i class="fas fa-plus"></i></div></div></li>
+	                <li><a href="#"><div class="add-item add-game"><div class="add-circle add-game-circle"><i class="fas fa-futbol"></i></div><span>Game</span></div></a></li>
+	                <li><a href="#"><div class="add-item add-league"><div class="add-circle add-league-circle"><i class="fas fa-users"></i></div><span>League</span></div></a></li>
+	                <li><a href="#"><div class="add-item add-discuss"><div class="add-circle add-discuss-circle"><i class="far fa-comment"></i></div><span>Discussion</span></div></a></li>
+	                <li><a href="#"><i class="far fa-user-circle"></i></a></li>
+	            </ul>
+			</div>
         </nav>
         <header class="primary-header">
         	<a class="brand" href="#"><img src="http://res.freestockphotos.biz/pictures/15/15872-illustration-of-a-soccer-ball-pv.png" alt="soccer ball">Play!</a>
@@ -30,15 +36,15 @@
 				<div class="scroll-wrapper">
 					<% games.forEach((game) => { %>
 					<div class="schedule-box">
-						<img src="/images/christian-widell-101891-unsplash.jpg" alt="soccer field">
+						<img src="/images/<%= Math.floor(Math.random() * 4 + 1) %>.jpg" alt="soccer field">
 						<div class="cal-leaf">
-							<span class="month">Aug</span>
-							<span class="day">9</span>
+							<span class="month"><%= monthArray[game.date.getMonth()] %></span>
+							<span class="day"><%= game.date.getDate() %></span>
 						</div>
 						<div class="schedule-text">
-							<h3><%= game.name %></h3>
-							<h4><%= game.location %></h4>
-							<datetime><%= game.date %></datetime>
+							<datetime><%= game.date.toDateString() %></datetime>
+							<h3><%= game.title %></h3>
+							<h4>Created by: Chamo</h4>
 						</div>
 					</div>
 					<% }); %>
@@ -51,15 +57,15 @@
 				<div class="scroll-wrapper">
 					<% games.forEach((game) => { %>
 					<div class="schedule-box">
-						<img src="/images/christian-widell-101891-unsplash.jpg" alt="soccer field">
+						<img src="/images/<%= Math.floor(Math.random() * 4 + 1) %>.jpg" alt="soccer field">
 						<div class="cal-leaf">
-							<span class="month">Aug</span>
-							<span class="day">9</span>
+							<span class="month"><%= monthArray[game.date.getMonth()] %></span>
+							<span class="day"><%= game.date.getDate() %></span>
 						</div>
 						<div class="schedule-text">
-							<h3><%= game.name %></h3>
-							<h4><%= game.location %></h4>
-							<datetime><%= game.date %></datetime>
+							<datetime><%= game.date.toDateString() %></datetime>
+							<h3><%= game.title %></h3>
+							<h4>Created by: Chamo</h4>
 						</div>
 					</div>
 					<% }); %>
@@ -71,5 +77,6 @@
         <footer>
         	
         </footer>
+        <script type="text/javascript" src="/scripts/scripts.js"></script>
     </body>
 </html>
