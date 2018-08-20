@@ -1,10 +1,10 @@
-import express from "express";
-const router = express.Router({ mergeParams: true });
+const express   = require("express");
+const router    = express.Router({ mergeParams: true });
 
 // Import database models
-import User     from "../models/user";
-import Game     from "../models/game";
-import Comment  from "../models/comment";
+const User      = require("../models/user");
+const Game      = require("../models/game");
+const Comment   = require("../models/comment");
 
 // New route - show form to create new comment
 router.get("/games/:id/comments/new", (req, res) => {
@@ -101,4 +101,4 @@ router.delete("/games/:id/comments/:comment_id", (req, res) => {
     });
 });
 
-export default router;
+module.exports = router;

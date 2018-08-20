@@ -1,23 +1,26 @@
 require('dotenv').config();
 
-import express          from "express";
-import bodyParser       from "body-parser";
-import mongoose         from "mongoose";
-import methodOverride   from "method-override";
-import flash            from "connect-flash";
-import session          from "express-session";
-import passport         from "passport";
-import LocalStrategy    from "passport-local";
+const express          = require("express");
+const bodyParser       = require("body-parser");
+const mongoose         = require("mongoose");
+const methodOverride   = require("method-override");
+const flash            = require("connect-flash");
+const session          = require("express-session");
+const passport         = require("passport");
+const LocalStrategy    = require("passport-local");
 
 // Import database models
-import User             from "./models/user";
-import Game             from "./models/game";
-import Comment          from "./models/comment";
+const User             = require("./models/user");
+const Game             = require("./models/game");
+const Comment          = require("./models/comment");
 
 // Import routes
-import indexRoutes      from "./routes/index";
-import gameRoutes       from "./routes/games";
-import commentRoutes    from "./routes/comments";
+const indexRoutes      = require("./routes/index");
+const gameRoutes       = require("./routes/games");
+const commentRoutes    = require("./routes/comments");
+
+// Import database seed
+const seedDB           = require("./seeds");
 
 const app = express();
 
@@ -30,6 +33,7 @@ app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.use(flash());
+seedDB();
 
 // Passport configuration
 app.use(session({
