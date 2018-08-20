@@ -1,12 +1,12 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
 // Game schema setup
 let gameSchema = new mongoose.Schema({
-    name: String,
-    description: String,
-    location: String,
+    title: String,
     address: String,
     date: Date,
+    gameType: String,
+    fieldType: String,
     createdAt: { type: Date, default: Date.now },
     creator: {
         id: {
@@ -20,7 +20,16 @@ let gameSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: "Comment"
         }
+    ],
+    playersGoing: [
+        {
+            id: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "User"
+            },
+            username: String
+        }
     ]
 });
 
-export default mongoose.model("Game", gameSchema);
+module.exports = mongoose.model("Game", gameSchema);

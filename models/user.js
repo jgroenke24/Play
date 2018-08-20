@@ -1,5 +1,5 @@
-import mongoose                 from "mongoose";
-import passportLocalMongoose    from "passport-local-mongoose";
+const mongoose              = require("mongoose");
+const passportLocalMongoose = require("passport-local-mongoose");
 
 // User schema setup
 let userSchema = new mongoose.Schema({
@@ -9,4 +9,4 @@ let userSchema = new mongoose.Schema({
 
 userSchema.plugin(passportLocalMongoose);
 
-export default mongoose.model("User", userSchema);
+module.exports = mongoose.model("User", userSchema);
