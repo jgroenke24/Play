@@ -14,8 +14,8 @@
             <div class="card text-center">
                 <div class="card-header">Featured</div>
                 <div class="card-body">
-                    <h5 class="card-title"><%= game.name %></h5>
-                    <p class="card-text"><%= game.description %></p>
+                    <h5 class="card-title"><%= game.title %></h5>
+                    <p class="card-text"><%= game.address %></p>
                     <a href="/games/<%= game._id %>/edit" class="btn btn-warning">Edit</a>
                     <form class="delete-form" action="/games/<%= game._id %>?_method=DELETE" method="POST">
                         <button class="btn btn-danger">Delete</button>
