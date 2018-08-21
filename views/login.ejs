@@ -1,49 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<title>Play!</title>
-		<link href="https://fonts.googleapis.com/css?family=Ubuntu:400,500,700" rel="stylesheet">
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
-		<link rel="stylesheet" href="/stylesheets/reset.css">
-		<link rel="stylesheet" href="/stylesheets/login.css">
-    </head>
-    <body>
-        <div class="container">
-            <main>
-                <div class="form-container">
-                    <form action="/login" method="post">
-                        <a class="logo-container" href="/">
-                            <img src="http://res.freestockphotos.biz/pictures/15/15872-illustration-of-a-soccer-ball-pv.png" alt="soccer ball">
-                            Play!
-                        </a>
-                        <h1 class="title">Log In</h1>
-                        <div class="input-container">
-                            <input class="input-100" type="text" name="username" placeholder="Username" required/>
-                        </div>
-                        <div class="input-container">
-                            <input class="input-100" type="password" name="password" placeholder="Password" required/>
-                        </div>
-                        <div class="form-options">
-                            <div class="checkbox-container">
-                                <input type="checkbox" name="remember" id="remember"/>
-                                <label class="checkbox-100" for="remember">Remember Me</label>
-                            </div>
-                            <div class="forgot-container">
-                                <a href="#">Forgot Password?</a>
-                            </div>
-                        </div>
-                        <div class="button-container">
-                            <input class="button-main" type="submit" value="Login"/>
-                        </div>
-                    </form>
-                    <div class="text-container">
-                        Not a member yet?
-                        <a class="button-100" href="/register">Register Now!</a>
-                    </div>
-                </div>
-            </main>
+<% include ./partials/auth/header %>
+
+<form action="/login" method="post">
+    <a class="logo-container" href="/">
+        <img src="/images/soccer-logo.png" alt="soccer ball">
+        Play!
+    </a>
+    <h1 class="title">Log In</h1>
+    <div class="input-container">
+        <input class="input-100" type="text" name="username" placeholder="Username" required/>
+    </div>
+    <div class="input-container">
+        <input class="input-100" type="password" name="password" placeholder="Password" required/>
+    </div>
+    <div class="form-options">
+        <div class="checkbox-container">
+            <input type="checkbox" name="remember" id="remember"/>
+            <label class="checkbox-100" for="remember">Remember Me</label>
         </div>
-    </body>
-</html>
+        <div class="forgot-container">
+            <a href="#">Forgot Password?</a>
+        </div>
+    </div>
+    <div class="button-container">
+        <input class="button-main" type="submit" value="Login"/>
+    </div>
+</form>
+<div class="text-container">
+    Not a member yet?
+    <a class="button-100" href="/register">Register Now!</a>
+</div>
+
+<% include ./partials/auth/footer %>

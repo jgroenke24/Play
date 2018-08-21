@@ -1,49 +1,24 @@
-<% include ./partials/header %>
+<% include ./partials/auth/header %>
 
-<div class="row">
-    <div class="col-10 col-md-8 col-lg-6 form-new">
-        <h1 class="text-center">Register</h1>
-        <form action="/register" method="POST">
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input class="form-control" type="email" name="email" id="email" autofocus required/>
-                <!-- Email form validation with pattern
-                <input class="form-control" 
-                       type="email" 
-                       name="email" 
-                       id="email" 
-                       pattern="^([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22))*\x40([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d))*(\.\w{2,})+$" 
-                       autofocus 
-                       required
-                />
-                -->
-            </div>
-            <div class="form-group">
-                <label for="username">Username:</label>
-                <input class="form-control" type="text" name="username" id="username" required/>
-            </div>
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input class="form-control" type="password" name="password" id="password" required/>
-                <!--
-                good link: https://stackoverflow.com/questions/48345922/reference-password-validation
-                strong password validation for deployed site
-                <input class="form-control" 
-                       type="password" 
-                       name="password" 
-                       id="password" 
-                       minlength="8" 
-                       pattern="^(?=\P{Ll}*\p{Ll})(?=\P{Lu}*\p{Lu})(?=\P{N}*\p{N})(?=[\p{L}\p{N}]*[^\p{L}\p{N}])[\s\S]{8,}$" 
-                       title="Password must be at least 8 characters long and must include at least 1 uppercase character, 1 lowercase character, 1 number and 1 non-alphanumeric character" 
-                       required
-                />
-                -->
-            </div>
-            
-            <input class="btn btn-primary btn-block" type="submit" value="Submit"/>
-        </form>
-        <a href="/games">Go Back</a>
+<form action="/register" method="post">
+    <a class="logo-container" href="/">
+        <img src="/images/soccer-logo.png" alt="soccer ball">
+        Play!
+    </a>
+    <h1 class="title">Sign Up</h1>
+    <div class="input-container">
+        <input class="input-100" type="text" name="username" placeholder="Username" required/>
     </div>
+    <div class="input-container">
+        <input class="input-100" type="password" name="password" placeholder="Password" required/>
+    </div>
+    <div class="button-container">
+        <input class="button-main" type="submit" value="Sign Up"/>
+    </div>
+</form>
+<div class="text-container">
+    Already a member?
+    <a class="button-100" href="/login">Log In!</a>
 </div>
 
-<% include ./partials/footer %>
+<% include ./partials/auth/footer %>
