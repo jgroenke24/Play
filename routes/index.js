@@ -61,7 +61,7 @@ router.post("/register", (req, res) => {
         }
         passport.authenticate("local")(req, res, () => {
             req.flash("success", "Welcome to Play! " + user.username);
-            res.redirect("/games");
+            res.redirect("/dashboard");
         });
     });
 });
@@ -74,7 +74,7 @@ router.get("/login", (req, res) => {
 // Log in user
 router.post("/login", passport.authenticate("local", 
     {
-        successRedirect: "/games",
+        successRedirect: "/dashboard",
         successFlash: "Welcome!",
         failureRedirect: "/login",
         failureFlash: true
@@ -85,7 +85,7 @@ router.post("/login", passport.authenticate("local",
 router.get("/logout", (req, res) => {
     req.logout();
     req.flash("success", "You logged out.");
-    res.redirect("/games");
+    res.redirect("/dashboard");
 });
 
 module.exports = router;

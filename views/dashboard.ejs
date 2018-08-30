@@ -12,114 +12,116 @@
     </head>
     <body>
         <nav id="mobile-nav">
-        	<div class="mobile-nav">
-	            <ul>
-	                <li><a class="active-link" href="#"><i class="fas fa-home"></i></a></li>
-	                <li><div id="add-all" class="add-item"><div class="add-circle add-all-circle"><i class="fas fa-plus"></i></div></div></li>
-	                <li><a href="#"><div class="add-item add-game"><div class="add-circle add-game-circle"><i class="fas fa-futbol"></i></div><span>Game</span></div></a></li>
-	                <li><a href="#"><div class="add-item add-league"><div class="add-circle add-league-circle"><i class="fas fa-users"></i></div><span>League</span></div></a></li>
-	                <li><a href="#"><div class="add-item add-discuss"><div class="add-circle add-discuss-circle"><i class="far fa-comment"></i></div><span>Discussion</span></div></a></li>
-	                <li><a href="#"><i class="far fa-user-circle"></i></a></li>
-	            </ul>
-			</div>
+            <div class="mobile-nav">
+                <ul>
+                    <li><a class="active-link" href="#"><i class="fas fa-home"></i></a></li>
+                    <li><div id="add-all" class="add-item"><div class="add-circle add-all-circle"><i class="fas fa-plus"></i></div></div></li>
+                    <li><a href="#"><div class="add-item add-game"><div class="add-circle add-game-circle"><i class="fas fa-futbol"></i></div><span>Game</span></div></a></li>
+                    <li><a href="#"><div class="add-item add-league"><div class="add-circle add-league-circle"><i class="fas fa-users"></i></div><span>League</span></div></a></li>
+                    <li><a href="#"><div class="add-item add-discuss"><div class="add-circle add-discuss-circle"><i class="far fa-comment"></i></div><span>Discussion</span></div></a></li>
+                    <li><a href="#"><i class="far fa-user-circle"></i></a></li>
+                </ul>
+            </div>
         </nav>
         <header class="primary-header">
-        	<a class="brand" href="#">
-        		<img src="/images/soccer-logo.png" alt="soccer ball">
-        		Play!
-        	</a>
+            <a class="brand" href="#">
+                <img src="/images/soccer-logo.png" alt="soccer ball">
+                Play!
+            </a>
         </header>
         
         <div class="row">
-        	
-        	<nav class="side-nav">
-        		
-        		<a class="user-avatar" href="#">
-        			<img src="https://thesocietypages.org/socimages/files/2009/05/vimeo.jpg">
-        			<span>Profile</span>
-        		</a>
-        		
-        		<ul>
-        			<li>
-        				<a class="nav-link active-link" href="#">
-        					<i class="fas fa-home fa-lg"></i>
-        					<span>Home</span>
-        				</a>
-        			</li>
-        			<li>
-        				<a class="nav-link" href="#">
-        					<i class="fas fa-futbol fa-lg"></i>
-        					<span>New Game</span>
-        				</a>
-        			</li>
-        			<li>
-        				<a class="nav-link" href="#">
-        					<i class="fas fa-users fa-lg"></i>
-        					<span>New League</span>
-        				</a>
-        			</li>
-        			<li>
-        				<a class="nav-link" href="#">
-        					<i class="far fa-comment fa-lg"></i>
-        					<span>New Discussion</span>
-        				</a>
-        			</li>
-        		</ul>
-        		
-        	</nav>
+            
+            <nav class="side-nav">
+                
+                <a class="user-avatar" href="#">
+                    <img src="/images/avatar.png">
+                    <span>Profile</span>
+                </a>
+                
+                <ul>
+                    <li>
+                        <a class="nav-link active-link" href="#">
+                            <i class="fas fa-home fa-lg"></i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-futbol fa-lg"></i>
+                            <span>New Game</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-users fa-lg"></i>
+                            <span>New League</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="#">
+                            <i class="far fa-comment fa-lg"></i>
+                            <span>New Discussion</span>
+                        </a>
+                    </li>
+                </ul>
+                
+            </nav>
         
-	        <main class="main-dash">
-	        	
-	        	<h1 class="container">Dashboard</h1>
-	            
-	            <!--Games Section-->
-	            <section class="container">
-					<h2>Upcoming Games...</h2>
-					<div class="scroll-wrapper">
-						<% games.forEach((game) => { %>
-						<div class="schedule-box">
-							<img src="/images/<%= Math.floor(Math.random() * 4 + 1) %>.jpg" alt="soccer field">
-							<div class="cal-leaf">
-								<span class="month"><%= monthArray[game.date.getMonth()] %></span>
-								<span class="day"><%= game.date.getDate() %></span>
-							</div>
-							<div class="schedule-text">
-								<datetime><%= game.date.toDateString() %></datetime>
-								<h3><%= game.title %></h3>
-								<h4>Created by: Chamo</h4>
-							</div>
-						</div>
-						<% }); %>
-					</div>
-			    </section>
-	            
-	            <!--Leagues Section-->
-	            <section class="container">
-	                <h2>Available leagues...</h2>
-					<div class="scroll-wrapper">
-						<% games.forEach((game) => { %>
-						<div class="schedule-box">
-							<img src="/images/<%= Math.floor(Math.random() * 4 + 1) %>.jpg" alt="soccer field">
-							<div class="cal-leaf">
-								<span class="month"><%= monthArray[game.date.getMonth()] %></span>
-								<span class="day"><%= game.date.getDate() %></span>
-							</div>
-							<div class="schedule-text">
-								<datetime><%= game.date.toDateString() %></datetime>
-								<h3><%= game.title %></h3>
-								<h4>Created by: Chamo</h4>
-							</div>
-						</div>
-						<% }); %>
-					</div>
-	            </section>
-	            
-	        </main>
-	    
-	    </div>
+            <main class="main-dash">
+                
+                <h1 class="container">Dashboard</h1>
+                
+                <!--Games Section-->
+                <section class="container">
+                    <h2>Upcoming Games...</h2>
+                    <div class="scroll-wrapper">
+                        <% games.forEach((game) => { %>
+                        <div class="schedule-box">
+                            <a href="/games/<%= game._id %>">
+                                <img src="/images/<%= Math.floor(Math.random() * 4 + 1) %>.jpg" alt="soccer field">
+                                <div class="cal-leaf">
+                                    <span class="month"><%= monthArray[game.date.getMonth()] %></span>
+                                    <span class="day"><%= game.date.getDate() %></span>
+                                </div>
+                                <div class="schedule-text">
+                                    <datetime><%= game.date.toDateString() %></datetime>
+                                    <h3><%= game.title %></h3>
+                                    <h4>Created by: Chamo</h4>
+                                </div>
+                            </a>
+                        </div>
+                        <% }); %>
+                    </div>
+                </section>
+                
+                <!--Leagues Section-->
+                <section class="container">
+                    <h2>Available leagues...</h2>
+                    <div class="scroll-wrapper">
+                        <% games.forEach((game) => { %>
+                        <div class="schedule-box">
+                            <img src="/images/<%= Math.floor(Math.random() * 4 + 1) %>.jpg" alt="soccer field">
+                            <div class="cal-leaf">
+                                <span class="month"><%= monthArray[game.date.getMonth()] %></span>
+                                <span class="day"><%= game.date.getDate() %></span>
+                            </div>
+                            <div class="schedule-text">
+                                <datetime><%= game.date.toDateString() %></datetime>
+                                <h3><%= game.title %></h3>
+                                <h4>Created by: Chamo</h4>
+                            </div>
+                        </div>
+                        <% }); %>
+                    </div>
+                </section>
+                
+            </main>
+        
+        </div>
         
         <footer>
-        	
+            
         </footer>
         <script type="text/javascript" src="/scripts/scripts.js"></script>
     </body>

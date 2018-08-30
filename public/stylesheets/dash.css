@@ -7,7 +7,7 @@ html {
   font: 400 16px/20px 'Ubuntu', sans-serif;
 }
 body {
-  background: #fefefe;
+  background: #ddd;
   color: #1c5253;
 }
 
@@ -22,7 +22,7 @@ a {
   bottom: 0;
   width: 100%;
   height: 8vh;
-  background: #edf1ec;
+  background: #eeffed;
   opacity: 0.9;
   font-size: 5vh;
   line-height: 8vh;
@@ -121,22 +121,21 @@ a {
   position: fixed;
   top: 0;
   width: 100%;
-  height: 8vh;
   background: #517447;
   /*background: radial-gradient(#517447, #012622);*/
   color: #fff;
-  text-align: center;
-  line-height: 8vh;
   z-index: 999;
 }
 .brand {
   font-size: 2.25rem;
   font-weight: 700;
   color: #fff;
+  display: flex;
+  align-items: center;
 }
 .brand img {
-  height: 8vh;
-  width: 8vh;
+  height: 3rem;
+  width: 3rem;
   display: inline-block;
   vertical-align: top;
 }
@@ -144,8 +143,8 @@ a {
 /*Main Navigation*/
 .side-nav {
   display: none;
-  background: #edf1ec;
-  margin-top: 8vh;
+  background: #012622;
+  margin-top: 3rem;
   width: 100%;
   position: fixed;
   top: 0;
@@ -156,29 +155,29 @@ a {
   overflow-y: auto;
 }
 .user-avatar {
-  height: 20vh;
-  width: 20vh;
-  margin: 5vh auto;
-  display: block;
+  height: 9rem;
+  width: 9rem;
+  margin: 2.5rem auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
 .user-avatar img {
-  height: 15vh;
-  width: 15vh;
+  height: 7rem;
+  width: 7rem;
   display: block;
   border-radius: 50%;
-  margin: 0 auto;
 }
 .user-avatar span {
   display: block;
-  margin: 2.5vh auto;
-  text-align: center;
 }
 .side-nav ul {
   display: flex;
   flex-direction: column;
 }
 .side-nav a {
-  color: #96ab90;
+  color: #ddd;
   font-weight: 500;
 }
 .nav-link {
@@ -192,7 +191,7 @@ a {
 }
 .side-nav .active-link,
 .side-nav a:hover {
-  color: #517447;
+  color: #fff;
 }
 
 /*To be name later*/
@@ -202,7 +201,7 @@ a {
   margin: 5vh auto 0 auto;
 }
 .container:first-of-type {
-  margin-top: 12vh;
+  margin-top: 4rem;
 }
 
 /*Games*/
@@ -213,6 +212,7 @@ a {
   padding: 2%;
 }
 .schedule-box {
+  background: #fff;
   border-radius: 8px;
   box-shadow: 0px 8px 8px 0px #888888;
   transition: all .2s linear;
@@ -221,6 +221,9 @@ a {
   height: 20em;
   flex: 0 0 auto;
   margin-right: 5%;
+}
+.schedule-box a {
+  color: #1c5253;
 }
 .schedule-box:hover {
 	transform: scale(1.025);
@@ -327,4 +330,116 @@ footer {
   .brand {
     margin-left: calc(8.75% - 63px);
   }
+}
+
+/*show*/
+
+.info-card {
+  background: #fff;
+  padding: 1em;
+  border-radius: 5px;
+  margin-bottom: 2em;
+}
+.info-item {
+  padding: 1rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.info-time {
+  font-size: 1.25em;
+  font-weight: 300;
+  display: block;
+}
+.info-title {
+  font-size: 2em;
+  font-weight: 500;
+}
+.info-creator {
+  font-weight: 300;
+}
+.info-location .info-time {
+  padding: .5rem 0 .5rem 0;
+}
+.info-buttons {
+  border-top: 1px solid #ddd;
+}
+#map {
+  width: 100%;
+  height: 200px;
+  background: black;
+}
+.pill {
+  color: #fff;
+  display: inline-block;
+  width: 5em;
+  padding: .5em;
+  text-align: center;
+  border-radius: 25px;
+  background: #517447;
+}
+.btn {
+  display: inline-block;
+  border: none;
+  border-radius: 5px;
+  font: inherit;
+  min-width: 5em;
+  padding: .5em;
+  color: #000;
+  cursor: pointer;
+  text-align: center;
+}
+.btn a {
+  color: #000;
+}
+.btn-delete {
+  background: #ff4a1c;
+}
+.btn-edit {
+  background: #ffe066;
+}
+.btn-comment {
+  background: #8bb174;
+}
+.comment-box {
+  background: #fff;
+  padding: 1em;
+}
+.comment {
+  /*padding: .5em .5em .5em 2em;*/
+  border-bottom: 1px solid #ddd;
+}
+.comment-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.25em;
+}
+.comment-avatar {
+  flex: 0 0 15%;
+  display: flex;
+  justify-content: center;
+}
+.comment-avatar img {
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 50%;
+}
+/*.comment-header img {*/
+/*  height: 1rem;*/
+/*  width: 1rem;*/
+/*}*/
+.comment-author {
+  font-weight: 500;
+  /*margin-bottom: .2em;*/
+  flex: 0 0 70%;
+}
+.comment-date {
+  display: block;
+  opacity: .5;
+  /*margin-bottom: 1em;*/
+  flex: 0 0 15%;
+}
+.comment-text {
+  margin-left: 15%;
+  margin-bottom: 1.25em;
 }
