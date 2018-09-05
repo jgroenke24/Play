@@ -204,6 +204,7 @@ a {
   margin-top: 4rem;
 }
 
+
 /*Games*/
 .scroll-wrapper {
   display: flex;
@@ -330,6 +331,17 @@ footer {
   .brand {
     margin-left: calc(8.75% - 63px);
   }
+  .grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .info-card {
+    flex: 0 0 47.5%;
+  }
+  .comment-box {
+    flex: 0 0 100%;
+  }
 }
 
 /*show*/
@@ -369,6 +381,16 @@ footer {
   height: 200px;
   background: black;
 }
+.info-players p {
+  font-size: 1.25em;
+  margin-bottom: 12px;
+}
+.info-player {
+  padding: 12px 10px;
+}
+.info-player:nth-child(even) {
+  background-color: rgba(0,0,0,0.05);
+}
 .pill {
   color: #fff;
   display: inline-block;
@@ -400,10 +422,6 @@ footer {
 }
 .btn-comment {
   background: #8bb174;
-}
-.comment-box {
-  background: #fff;
-  padding: 1em;
 }
 .comment {
   /*padding: .5em .5em .5em 2em;*/

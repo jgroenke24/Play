@@ -99,7 +99,20 @@
                             <div id="map"></div>
                         </div>
                         
-                        <div class="comment-box">
+                        <div class="info-card">
+                            <div class="info-players">
+                                <p>Who's going</p>
+                                <ul>
+                                    <li class="info-player">Homer</li>
+                                    <li class="info-player">Marge</li>
+                                    <li class="info-player">Bart</li>
+                                    <li class="info-player">Lisa</li>
+                                    <li class="info-player">Maggie</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="info-card comment-box">
                             <a class="btn btn-comment" href="/games/<%= game._id %>/comments/new">Add new comment</a>
                             <hr>
                             <% if (game.comments.length < 1) { %>
