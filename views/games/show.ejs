@@ -22,7 +22,7 @@
        <div class="info-card">
             <div class="info-location">
                 <time class="info-time" datetime="<%= game.date.toDateString() %>"><%= moment(game.date).format('LL') %></time>
-                <time class="info-time" datetime="18:00 - 20:00"><%= moment(game.date).format('LT') %></time>
+                <time class="info-time" datetime="<%= moment(game.date).format('LT') %>"><%= moment(game.date).format('LT') %></time>
                 <p class="info-item"><%= game.address %></p>
             </div>
             <div id="map"></div>
@@ -73,5 +73,23 @@
     </div>
     
 </section>
+
+<script>
+    function initMap() {
+        var lat = <%= game.lat %>;
+        var lng = <%= game.lng %>;
+        var center = {lat: lat, lng: lng };
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 15,
+            center: center,
+            scrollwheel: false
+        });
+        var marker = new google.maps.Marker({
+            position: center,
+            map: map
+        });
+    }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDt96VJ4gZNJ1rUF59_NRxPSJZb4pY4N2A&callback=initMap"></script>
 
 <% include ../partials/footer %>

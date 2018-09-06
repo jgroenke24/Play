@@ -4,6 +4,8 @@ const mongoose = require("mongoose");
 let gameSchema = new mongoose.Schema({
     title: String,
     address: String,
+    lat: Number,
+    lng: Number,
     date: Date,
     gameType: String,
     fieldType: String,

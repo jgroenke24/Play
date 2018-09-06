@@ -2,9 +2,19 @@ const express   = require("express");
 const router    = express.Router({ mergeParams: true });
 
 // Import database models
-const User      = require("../models/user");
 const Game      = require("../models/game");
-const Comment   = require("../models/comment");
+
+// Require geocoder for Google Maps
+const NodeGeocoder = require('node-geocoder');
+ 
+let options = {
+  provider: 'google',
+  httpAdapter: 'https',
+  apiKey: process.env.GEOCODER_API_KEY,
+  formatter: null
+};
+ 
+let geocoder = NodeGeocoder(options);
 
 // Index route - show all games
 router.get("/games", (req, res) => {
@@ -31,19 +41,28 @@ router.post("/games", (req, res) => {
     let newGame = req.body.game;
     if (!newGame.title || !newGame.address || !newGame.date || !newGame.gameType || !newGame.fieldType || !newGame.date || !newGame.time) {
         req.flash("error", "One or more of your submissions was invalid.  Please try again");
-        res.redirect("/games/new");
+        return res.redirect("/games/new");
     }
-    // Create new game and save to database
     newGame.date = new Date(`${newGame.date} ${newGame.time}`);
-    Game.create(newGame, (err, newlyCreatedGame) => {
-        if (err) {
-            console.log(err);
-            req.flash("error", "Could not create your game.  Please try again.");
-            res.redirect("/games/new");
-        } else {
-            req.flash("success", "Game created.");
-            res.redirect("/games");
+    // Use geocoder to get latitude and longitude for map
+    geocoder.geocode(newGame.address, (err, data) => {
+        if (err || !data.length) {
+            req.flash("error", "Invalid address. Try again.");
+            return res.redirect("back");
         }
+        newGame.lat = data[0].latitude;
+        newGame.lng = data[0].longitude;
+        // Create new game and save to database
+        Game.create(newGame, (err, newlyCreatedGame) => {
+            if (err) {
+                console.log(err);
+                req.flash("error", "Could not create your game.  Please try again.");
+                res.redirect("/games/new");
+            } else {
+                req.flash("success", "Game created.");
+                res.redirect("/games");
+            }
+        });
     });
 });
 
@@ -79,17 +98,26 @@ router.put("/games/:id", (req, res) => {
     let editGame = req.body.game;
     if (!editGame.title || !editGame.address || !editGame.date || !editGame.gameType || !editGame.fieldType || !editGame.date || !editGame.time) {
         req.flash("error", "One or more of your submissions was invalid.  Please try again");
-        res.redirect("/games/" + req.params.id);
+        return res.redirect("/games/" + req.params.id);
     }
-    Game.findByIdAndUpdate(req.params.id, editGame, (err, result) => {
-        if (err) {
-            console.log(err);
-            req.flash("error", "Something went wrong.  Please try again.");
-            res.redirect("/games/" + req.params.id);
-        } else {
-            req.flash("success", "Game information updated.");
-            res.redirect("/games/" + req.params.id);
+    editGame.date = new Date(`${editGame.date} ${editGame.time}`);
+    geocoder.geocode(editGame.address, (err, data) => {
+        if (err || !data.length) {
+            req.flash("error", "Invalid address. Try again.");
+            return res.redirect("back");
         }
+        editGame.lat = data[0].latitude;
+        editGame.lng = data[0].longitude;
+        Game.findByIdAndUpdate(req.params.id, editGame, (err, result) => {
+            if (err) {
+                console.log(err);
+                req.flash("error", "Something went wrong.  Please try again.");
+                res.redirect("/games/" + req.params.id);
+            } else {
+                req.flash("success", "Game information updated.");
+                res.redirect("/games/" + req.params.id);
+            }
+        });
     });
 });
 
