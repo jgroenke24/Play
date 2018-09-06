@@ -27,8 +27,14 @@ router.get("/games/new", (req, res) => {
 
 // Create route - add new game to database
 router.post("/games", (req, res) => {
-    // Create new game and save to database
+    // Validate user inputs
     let newGame = req.body.game;
+    if (!newGame.title || !newGame.address || !newGame.date || !newGame.gameType || !newGame.fieldType || !newGame.date || !newGame.time) {
+        req.flash("error", "One or more of your submissions was invalid.  Please try again");
+        res.redirect("/games/new");
+    }
+    // Create new game and save to database
+    newGame.date = new Date(`${newGame.date} ${newGame.time}`);
     Game.create(newGame, (err, newlyCreatedGame) => {
         if (err) {
             console.log(err);
@@ -69,11 +75,17 @@ router.get("/games/:id/edit", (req, res) => {
 
 // Update route - update game info with information from edit form
 router.put("/games/:id", (req, res) => {
-    Game.findByIdAndUpdate(req.params.id, req.body.game, (err, result) => {
+    // Validate user inputs
+    let editGame = req.body.game;
+    if (!editGame.title || !editGame.address || !editGame.date || !editGame.gameType || !editGame.fieldType || !editGame.date || !editGame.time) {
+        req.flash("error", "One or more of your submissions was invalid.  Please try again");
+        res.redirect("/games/" + req.params.id);
+    }
+    Game.findByIdAndUpdate(req.params.id, editGame, (err, result) => {
         if (err) {
             console.log(err);
             req.flash("error", "Something went wrong.  Please try again.");
-            res.redirect("/games");
+            res.redirect("/games/" + req.params.id);
         } else {
             req.flash("success", "Game information updated.");
             res.redirect("/games/" + req.params.id);

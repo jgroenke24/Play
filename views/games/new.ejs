@@ -1,33 +1,94 @@
 <% include ../partials/header %>
 
-<div class="row">
-    <div class="col-10 col-md-8 col-lg-6 form-new">
-        <h1 class="text-center">Add a new game</h1>
-        <form action="/games" method="POST">
-            <div class="form-group">
-                <label for="name">Name:</label>
-                <input class="form-control" type="text" name="game[name]" id="name" placeholder="Name of game" autofocus/>
+<div class="container">
+    <h2 class="title">Add a new game</h2>
+    <form class="form-game" action="/games" method="post">
+        
+        <label class="game-input-desc" for="game-title">Game Title</label>
+        <input class="game-input" type="text" id="game-title" name="game[title]" placeholder="Enter a short title for the game (up to 40 characters)" required/>
+        
+        <label class="game-input-desc" for="game-address">Address</label>
+        <input class="game-input" type="text" id="game-address" name="game[address]" placeholder="Enter the address of the field (or one nearby)" required/>
+        
+        <!--Date/time inputs-->
+        <div class="game-datetime">
+            <div class="nativeDatePicker game-date">
+                <label class="game-input-desc" for="game-date">Date</label>
+                <input class="game-input" type="date" id="game-date" name="game[date]" required>
             </div>
-            <div class="form-group">
-                <label for="desc">Description:</label>
-                <input class="form-control" type="text" name="game[description]" id="desc" placeholder="Description"/>
+            <p class="fallbackDateLabel">Date</p>
+            <div class="fallbackDatePicker">
+                <span>
+                    <label for="day">Day:</label>
+                    <select id="day" name="day">
+                    </select>
+                </span>
+                <span>
+                    <label for="month">Month:</label>
+                    <select id="month" name="month">
+                        <option value="01" selected>January</option>
+                        <option value="02">February</option>
+                        <option value="03">March</option>
+                        <option value="04">April</option>
+                        <option value="05">May</option>
+                        <option value="06">June</option>
+                        <option value="07">July</option>
+                        <option value="08">August</option>
+                        <option value="09">September</option>
+                        <option value="10">October</option>
+                        <option value="11">November</option>
+                        <option value="12">December</option>
+                    </select>
+                </span>
+                <span>
+                    <label for="year">Year:</label>
+                    <select id="year" name="year">
+                    </select>
+                </span>
             </div>
-            <div class="form-group">
-                <label for="loc">Location:</label>
-                <input class="form-control" type="text" name="game[location]" id="loc" placeholder="Location"/>
+            
+            <div class="nativeTimePicker game-time">
+                <label class="game-input-desc" for="game-time">Time</label>
+                <input class="game-input" id="game-time" type="time" name="game[time]" required>
             </div>
-            <div class="form-group">
-                <label for="addr">Address:</label>
-                <input class="form-control" type="text" name="game[address]" id="addr" placeholder="Address"/>
+            <p class="fallbackTimeLabel">Time</p>
+            <div class="fallbackTimePicker">
+                <div>
+                <span>
+                    <label for="hour">Hour</label>
+                    <select id="hour" name="hour">
+                    </select>
+                </span>
+                <span>
+                    <label for="minute">Minute</label>
+                    <select id="minute" name="minute">
+                    </select>
+                    </span>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="date">Date of game:</label>
-                <input class="form-control" type="date" name="game[date]" placeholder="Date"/>
-
-            <input class="btn btn-primary btn-block" type="submit" value="Submit"/>
-        </form>
-        <a href="/games">Go Back</a>
-    </div>
+        </div>
+        <!--End of date/time inputs-->
+        
+        <fieldset>
+            <legend class="game-input-desc">Game Type</legend>
+            
+            <label for="game-type1">Pickup</label>
+            <input type="radio" id="game-type1" name="game[gameType]" value="Pickup"/>
+            
+            <label for="game-type2">Game</label>
+            <input type="radio" id="game-type2" name="game[gameType]" value="Game"/>
+        </fieldset>
+        
+        <label class="game-input-desc" for="game-field">Field Type</label>
+        <select class="game-input" id="game-field" name="game[fieldType]">
+            <option value="">--Please choose a field type--</option>
+            <option value="Grass">Grass</option>
+            <option value="Turf">Turf</option>
+            <option value="Astroturf">Astroturf</option>
+            <option value="Street">Street</option>
+        </select>
+        <input class="btn btn-comment" type="submit" value="Submit"/>
+    </form>
 </div>
 
 <% include ../partials/footer %>

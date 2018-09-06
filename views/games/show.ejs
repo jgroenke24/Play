@@ -1,157 +1,77 @@
-<% const monthArray = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]; %>
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Play!</title>
-        <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700" rel="stylesheet">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
-        <link rel="stylesheet" href="/stylesheets/reset.css"/>
-        <link rel="stylesheet" href="/stylesheets/dash.css"/>
-    </head>
-    <body>
-        <nav id="mobile-nav">
-            <div class="mobile-nav">
-                <ul>
-                    <li><a class="active-link" href="#"><i class="fas fa-home"></i></a></li>
-                    <li><div id="add-all" class="add-item"><div class="add-circle add-all-circle"><i class="fas fa-plus"></i></div></div></li>
-                    <li><a href="#"><div class="add-item add-game"><div class="add-circle add-game-circle"><i class="fas fa-futbol"></i></div><span>Game</span></div></a></li>
-                    <li><a href="#"><div class="add-item add-league"><div class="add-circle add-league-circle"><i class="fas fa-users"></i></div><span>League</span></div></a></li>
-                    <li><a href="#"><div class="add-item add-discuss"><div class="add-circle add-discuss-circle"><i class="far fa-comment"></i></div><span>Discussion</span></div></a></li>
-                    <li><a href="#"><i class="far fa-user-circle"></i></a></li>
-                </ul>
+<% include ../partials/header %>
+
+<!--show Section-->
+<section class="container">
+    
+    <div class="grid">
+        
+        <div class="info-card">
+            <time class="info-item info-time" datetime="<%= game.date.toDateString() %>"><%= game.date.toDateString() %></time>
+                <div class="info-item info-title"><%= game.title %></div>
+                <p class="info-item info-creator">Created 2 days ago by Chamo</p>
+                <div class="info-item">Field type: <span class="pill"><%= game.fieldType %></span></div>
+                <div class="info-item">Game type: <span class="pill"><%= game.gameType %></span></div>
+                <div class="info-item info-buttons">
+                <a class="btn btn-edit" href="/games/<%= game._id %>/edit">Edit</a>
+                <form action="/games/<%= game._id %>?_method=DELETE" method="POST">
+                    <input class="btn btn-delete" type="submit" value="Delete"/>
+                </form>
             </div>
-        </nav>
-        <header class="primary-header">
-            <a class="brand" href="#">
-                <img src="/images/soccer-logo.png" alt="soccer ball">Play!
-            </a>
-        </header>
-        
-        <div class="row">
-
-            <nav class="side-nav">
-
-                <a class="user-avatar" href="#">
-                    <img src="/images/avatar.png">
-                    <span>Profile</span>
-                </a>
-
-                <ul>
-                    <li>
-                        <a class="nav-link active-link" href="#">
-                            <i class="fas fa-home fa-lg"></i>
-                            <span>Home</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="#">
-                            <i class="fas fa-futbol fa-lg"></i>
-                            <span>New Game</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="#">
-                            <i class="fas fa-users fa-lg"></i>
-                            <span>New League</span>
-                    </a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="#">
-                            <i class="far fa-comment fa-lg"></i>
-                            <span>New Discussion</span>
-                        </a>
-                    </li>
-                </ul>
-
-            </nav>
-        
-            <main class="main-dash">
-
-                <h1 class="container">Dashboard</h1>
-                
-                <!--show Section-->
-                <section class="container">
-                    
-                    <div class="grid">
-                        
-                        <div class="info-card">
-                            <time class="info-item info-time" datetime="<%= game.date.toDateString() %>"><%= game.date.toDateString() %></time>
-                                <div class="info-item info-title"><%= game.title %></div>
-                                <p class="info-item info-creator">Created 2 days ago by Chamo</p>
-                                <div class="info-item">Field type: <span class="pill"><%= game.fieldType %></span></div>
-                                <div class="info-item">Game type: <span class="pill"><%= game.gameType %></span></div>
-                                <div class="info-item info-buttons">
-                                <a class="btn btn-edit" href="/games/<%= game._id %>/edit">Edit</a>
-                                <form action="/games/<%= game._id %>?_method=DELETE" method="POST">
-                                    <input class="btn btn-delete" type="submit" value="Delete"/>
-                                </form>
-                            </div>
-                        </div>
-                        
-                       <div class="info-card">
-                            <div class="info-location">
-                                <time class="info-time" datetime="<%= game.date.toDateString() %>"><%= game.date.toDateString() %></time>
-                                <time class="info-time" datetime="18:00 - 20:00">6:00 PM - 8:00 PM</time>
-                                <p class="info-item"><%= game.address %></p>
-                            </div>
-                            <div id="map"></div>
-                        </div>
-                        
-                        <div class="info-card">
-                            <div class="info-players">
-                                <p>Who's going</p>
-                                <ul>
-                                    <li class="info-player">Homer</li>
-                                    <li class="info-player">Marge</li>
-                                    <li class="info-player">Bart</li>
-                                    <li class="info-player">Lisa</li>
-                                    <li class="info-player">Maggie</li>
-                                </ul>
-                            </div>
-                        </div>
-                        
-                        <div class="info-card comment-box">
-                            <a class="btn btn-comment" href="/games/<%= game._id %>/comments/new">Add new comment</a>
-                            <hr>
-                            <% if (game.comments.length < 1) { %>
-                            <div class="comment-none">
-                                No comments
-                            </div>
-                            <% } else { %>
-                            <% game.comments.forEach((comment) => { %>
-                            <div class="comment">
-                                <div class="comment-header">
-                                    <div class="comment-avatar">
-                                        <img src="/images/avatar.png"></img>
-                                    </div>
-                                    <div class="comment-author">
-                                        <p>Homer Simpson</p>
-                                    </div>
-                                    <div class="comment-date">
-                                        <small class="comment-date"><%= comment.createdAt.toDateString() %></small>
-                                    </div>
-                                </div>
-                                <div class="comment-text">
-                                    <p><%= comment.text %></p>
-                                </div>
-                            </div>
-                            <% }); %>
-                            <% } %>
-                        </div>
-                        
-                    </div>
-                    
-                </section>
-                
-            </main>
-       
         </div>
         
-        <footer>
+       <div class="info-card">
+            <div class="info-location">
+                <time class="info-time" datetime="<%= game.date.toDateString() %>"><%= game.date.toDateString() %></time>
+                <time class="info-time" datetime="18:00 - 20:00">6:00 PM - 8:00 PM</time>
+                <p class="info-item"><%= game.address %></p>
+            </div>
+            <div id="map"></div>
+        </div>
+        
+        <div class="info-card">
+            <div class="info-players">
+                <p>Who's going</p>
+                <ul>
+                    <li class="info-player">Homer</li>
+                    <li class="info-player">Marge</li>
+                    <li class="info-player">Bart</li>
+                    <li class="info-player">Lisa</li>
+                    <li class="info-player">Maggie</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="info-card comment-box">
+            <a class="btn btn-comment" href="/games/<%= game._id %>/comments/new">Add new comment</a>
+            <hr>
+            <% if (game.comments.length < 1) { %>
+            <div class="comment-none">
+                No comments
+            </div>
+            <% } else { %>
+            <% game.comments.forEach((comment) => { %>
+            <div class="comment">
+                <div class="comment-header">
+                    <div class="comment-avatar">
+                        <img src="/images/avatar.png"></img>
+                    </div>
+                    <div class="comment-author">
+                        <p>Homer Simpson</p>
+                    </div>
+                    <div class="comment-date">
+                        <small class="comment-date"><%= comment.createdAt.toDateString() %></small>
+                    </div>
+                </div>
+                <div class="comment-text">
+                    <p><%= comment.text %></p>
+                </div>
+            </div>
+            <% }); %>
+            <% } %>
+        </div>
+        
+    </div>
+    
+</section>
 
-        </footer>
-        <script type="text/javascript" src="/scripts/scripts.js"></script>
-    </body>
-</html>
+<% include ../partials/footer %>

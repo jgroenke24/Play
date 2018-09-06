@@ -1,25 +1,25 @@
 <% include ../partials/header %>
 
-    <div class="jumbotron">
-        <h1 class="display-4">Welcome to Play!</h1>
-        <p class="lead">Come check out the games we have coming up!</p>
-        <hr class="my-4">
-        <p>Feel free to schedule your own game and invite others to join!</p>
-        <a class="btn btn-primary btn-lg" href="/games/new" role="button">Schedule a new game</a>
-    </div>
-    
-    <div class="row">
-        <% games.forEach(function(game) { %>
-        <div class="col-12 col-md-4 col-lg-3 d-flex align-items-stretch flex-wrap">
-            <div class="card flex-sm-fill">
-                <div class="card-body">
-                    <h5 class="card-title"><%= game.title %></h5>
-                    <p class="card-text"><%= game.address %></p>
-                    <a href="/games/<%= game._id %>" class="btn btn-primary">More info</a>
-                </div>
+<% const monthArray = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]; %>
+<!--Games Section-->
+<section class="container">
+    <h2>Upcoming Games...</h2>
+    <% games.forEach((game) => { %>
+    <div class="schedule-box">
+        <a href="/games/<%= game._id %>">
+            <img src="/images/<%= Math.floor(Math.random() * 4 + 1) %>.jpg" alt="soccer field">
+            <div class="cal-leaf">
+                <span class="month"><%= monthArray[game.date.getMonth()] %></span>
+                <span class="day"><%= game.date.getDate() %></span>
             </div>
-        </div>
-        <% }); %>
+            <div class="schedule-text">
+                <datetime><%= game.date.toDateString() %></datetime>
+                <h3><%= game.title %></h3>
+                <h4>Created by: Chamo</h4>
+            </div>
+        </a>
     </div>
+    <% }); %>
+</section>
 
 <% include ../partials/footer %>

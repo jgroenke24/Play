@@ -461,3 +461,44 @@ footer {
   margin-left: 15%;
   margin-bottom: 1.25em;
 }
+
+/*game form*/
+.form-game {
+  display: flex;
+  flex-direction: column;
+}
+.form-game input,
+.form-game label {
+  display: inline-block;
+}
+.game-input-desc {
+  font-size: 1.15rem;
+  padding: 1rem 0;
+}
+.game-input {
+  border: none;
+  height: 2rem;
+  padding: 0 10px;
+  font: inherit;
+}
+select.game-input {
+  color: #777;
+}
+.form-game .btn {
+  margin-top: 2rem;
+  color: #fff;
+  font-weight: 500;
+}
+.game-datetime {
+  display: flex;
+  justify-content: space-between;
+}
+.game-date,
+.game-time {
+  flex: 0 0 45%;
+}
+.game-date .game-input,
+.game-time .game-input {
+  width: 100%;
+  color: #777;
+}
