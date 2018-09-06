@@ -1,25 +1,26 @@
 <% include ../partials/header %>
 
-<% const monthArray = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]; %>
 <!--Games Section-->
 <section class="container">
     <h2>Upcoming Games...</h2>
-    <% games.forEach((game) => { %>
-    <div class="schedule-box">
-        <a href="/games/<%= game._id %>">
-            <img src="/images/<%= Math.floor(Math.random() * 4 + 1) %>.jpg" alt="soccer field">
-            <div class="cal-leaf">
-                <span class="month"><%= monthArray[game.date.getMonth()] %></span>
-                <span class="day"><%= game.date.getDate() %></span>
-            </div>
-            <div class="schedule-text">
-                <datetime><%= game.date.toDateString() %></datetime>
-                <h3><%= game.title %></h3>
-                <h4>Created by: Chamo</h4>
-            </div>
-        </a>
+    <div class="scroll-wrapper">
+        <% games.forEach((game) => { %>
+        <div class="schedule-box">
+            <a href="/games/<%= game._id %>">
+                <img src="/images/<%= Math.floor(Math.random() * 4 + 1) %>.jpg" alt="soccer field">
+                <div class="cal-leaf">
+                    <span class="month"><%= moment(game.date).format("MMM") %></span>
+                    <span class="day"><%= game.date.getDate() %></span>
+                </div>
+                <div class="schedule-text">
+                    <datetime><%= moment(game.date).format('LL') %></datetime>
+                    <h3><%= game.title %></h3>
+                    <h4><%= `Created by ${game.creator.username}` %></h4>
+                </div>
+            </a>
+        </div>
+        <% }); %>
     </div>
-    <% }); %>
 </section>
 
 <% include ../partials/footer %>

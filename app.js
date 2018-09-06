@@ -35,6 +35,8 @@ app.use(methodOverride("_method"));
 app.use(flash());
 seedDB();
 
+app.locals.moment = require("moment");
+
 // Passport configuration
 app.use(session({
     secret: process.env.SECRET_KEY,

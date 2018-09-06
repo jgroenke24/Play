@@ -342,6 +342,9 @@ footer {
   .comment-box {
     flex: 0 0 100%;
   }
+  .form-game .btn {
+    margin-bottom: 20px;
+  }
 }
 
 /*show*/
@@ -488,6 +491,7 @@ select.game-input {
   margin-top: 2rem;
   color: #fff;
   font-weight: 500;
+  margin-bottom: 12vh;
 }
 .game-datetime {
   display: flex;
@@ -495,7 +499,7 @@ select.game-input {
 }
 .game-date,
 .game-time {
-  flex: 0 0 45%;
+  flex: 0 0 43%;
 }
 .game-date .game-input,
 .game-time .game-input {

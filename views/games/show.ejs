@@ -6,23 +6,23 @@
     <div class="grid">
         
         <div class="info-card">
-            <time class="info-item info-time" datetime="<%= game.date.toDateString() %>"><%= game.date.toDateString() %></time>
+            <time class="info-item info-time" datetime="<%= game.date.toDateString() %>"><%= moment(game.date).format('LL') %></time>
                 <div class="info-item info-title"><%= game.title %></div>
-                <p class="info-item info-creator">Created 2 days ago by Chamo</p>
+                <p class="info-item info-creator"><%= `Created ${moment(game.createdAt).fromNow()} by ${game.creator.username}` %></p>
                 <div class="info-item">Field type: <span class="pill"><%= game.fieldType %></span></div>
                 <div class="info-item">Game type: <span class="pill"><%= game.gameType %></span></div>
                 <div class="info-item info-buttons">
                 <a class="btn btn-edit" href="/games/<%= game._id %>/edit">Edit</a>
                 <form action="/games/<%= game._id %>?_method=DELETE" method="POST">
-                    <input class="btn btn-delete" type="submit" value="Delete"/>
+                    <button class="btn btn-delete">Delete</button>
                 </form>
             </div>
         </div>
         
        <div class="info-card">
             <div class="info-location">
-                <time class="info-time" datetime="<%= game.date.toDateString() %>"><%= game.date.toDateString() %></time>
-                <time class="info-time" datetime="18:00 - 20:00">6:00 PM - 8:00 PM</time>
+                <time class="info-time" datetime="<%= game.date.toDateString() %>"><%= moment(game.date).format('LL') %></time>
+                <time class="info-time" datetime="18:00 - 20:00"><%= moment(game.date).format('LT') %></time>
                 <p class="info-item"><%= game.address %></p>
             </div>
             <div id="map"></div>
@@ -59,7 +59,7 @@
                         <p>Homer Simpson</p>
                     </div>
                     <div class="comment-date">
-                        <small class="comment-date"><%= comment.createdAt.toDateString() %></small>
+                        <small class="comment-date"><%= moment(comment.createdAt).fromNow() %></small>
                     </div>
                 </div>
                 <div class="comment-text">
