@@ -1,17 +1,13 @@
 <% include ../partials/header %>
 
-<div class="row">
-    <div class="col-10 col-md-8 col-lg-6 form-new">
-        <h1 class="text-center">Edit comment for <%= game.name %></h1>
-        <form action="/games/<%= game._id %>/comments/<%= comment._id %>?_method=PUT" method="POST">
-            <div class="form-group">
-                <label for="comment">Comment:</label>
-                <input class="form-control" type="text" name="comment[text]" id="comment" value="<%= comment.text %>" autofocus/>
-            </div>
-            <input class="btn btn-primary btn-block" type="submit" value="Submit"/>
-        </form>
-        <a href="/games/<%= game._id %>">Go Back</a>
-    </div>
+<div class="container">
+    <h2 class="title">Edit comment for <%= game.title %></h2>
+    <form class="form-game" action="/games/<%= game._id %>/comments/<%= comment._id %>?_method=PUT" method="post">
+        
+        <label class="game-input-desc" for="game-comment">Comment</label>
+        <input class="game-input" type="text" id="game-comment" name="comment[text]" value="<%= comment.text %>" autofocus required/>
+        <button class="btn btn-comment">Submit</button>
+    </form>
 </div>
 
 <% include ../partials/footer %>

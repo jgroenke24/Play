@@ -56,14 +56,20 @@
                         <img src="/images/avatar.png"></img>
                     </div>
                     <div class="comment-author">
-                        <p>Homer Simpson</p>
+                        <p><%= comment.author.username %></p>
                     </div>
                     <div class="comment-date">
                         <small class="comment-date"><%= moment(comment.createdAt).fromNow() %></small>
                     </div>
                 </div>
                 <div class="comment-text">
-                    <p><%= comment.text %></p>
+                    <%= comment.text %>
+                    <div class="comment-buttons">
+                        <a class="comment-edit" href="/games/<%= game._id %>/comments/<%= comment._id %>/edit">Edit</a>
+                        <form action="/games/<%= game._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
+                            <button class="comment-delete">Delete</button>
+                        </form>
+                    </div>
                 </div>
             </div>
             <% }); %>

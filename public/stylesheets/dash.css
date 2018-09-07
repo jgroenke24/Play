@@ -300,53 +300,6 @@ footer {
   margin-top: 12vh;
 }
 
-@media screen and (min-width: 768px) {
-  .mobile-nav {
-    display: none;
-  }
-  .row {
-    display: flex;
-  }
-  .side-nav {
-    display: block;
-    flex: 0 0 17.5%;
-    max-width: 17.5%;
-  }
-  h1 {
-    display: block;
-  }
-  .main-dash {
-    flex: 0 0 82.5%;
-    max-width: 82.5%;
-    margin-left: auto;
-    padding-left: 2.5%;
-    padding-right: 2.5%;
-  }
-  .container {
-    width: 100%;
-  }
-  .primary-header {
-    text-align: left;
-  }
-  .brand {
-    margin-left: calc(8.75% - 63px);
-  }
-  .grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
-  .info-card {
-    flex: 0 0 47.5%;
-  }
-  .comment-box {
-    flex: 0 0 100%;
-  }
-  .form-game .btn {
-    margin-bottom: 20px;
-  }
-}
-
 /*show*/
 
 .info-card {
@@ -456,18 +409,38 @@ footer {
 /*}*/
 .comment-author {
   font-weight: 500;
-  /*margin-bottom: .2em;*/
   flex: 0 0 70%;
 }
 .comment-date {
   display: block;
-  opacity: .5;
-  /*margin-bottom: 1em;*/
+  opacity: .7;
   flex: 0 0 15%;
+  text-align: center;
 }
 .comment-text {
   margin-left: 15%;
   margin-bottom: 1.25em;
+}
+.comment-buttons {
+  margin-top: 1rem;
+}
+.comment-buttons form {
+  display: inline-block;
+}
+.comment-edit {
+  color: #1c5253;
+  opacity: .7;
+  margin-right: 1rem;
+  font-weight: 300;
+}
+.comment-delete {
+  background: none;
+  color: #1c5253;
+  border: none;
+  font-size: 1rem;
+  opacity: .7;
+  text-transform: uppercase;
+  cursor: pointer;
 }
 
 /*game form*/
@@ -528,4 +501,63 @@ select.game-input {
     color: #721c24;
     background-color: #f8d7da;
     border-color: #f5c6cb;
+}
+
+@media screen and (min-width: 768px) {
+  .mobile-nav {
+    display: none;
+  }
+  .row {
+    display: flex;
+  }
+  .side-nav {
+    display: block;
+    flex: 0 0 17.5%;
+    max-width: 17.5%;
+  }
+  h1 {
+    display: block;
+  }
+  .main-dash {
+    flex: 0 0 82.5%;
+    max-width: 82.5%;
+    margin-left: auto;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
+  }
+  .container {
+    width: 100%;
+  }
+  .primary-header {
+    text-align: left;
+  }
+  .brand {
+    margin-left: calc(8.75% - 63px);
+  }
+  .grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .info-card {
+    flex: 0 0 47.5%;
+  }
+  .comment-box {
+    flex: 0 0 100%;
+  }
+  .form-game .btn {
+    margin-bottom: 20px;
+  }
+  .comment-text {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .comment-buttons {
+    margin: 0;
+    flex: 0 0 17.75%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
