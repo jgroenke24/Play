@@ -77,14 +77,14 @@
             <legend class="game-input-desc">Game Type</legend>
             
             <label for="game-type1">Pickup</label>
-            <input type="radio" id="game-type1" name="game[gameType]" value="Pickup" checked="<% game.gameType === "Pickup" ? "true" : "false" %>"/>
+            <input type="radio" id="game-type1" name="game[gameType]" value="Pickup" checked="<% game.gameType === "Pickup" ? "true" : "false" %>" required/>
             
             <label for="game-type2">Game</label>
             <input type="radio" id="game-type2" name="game[gameType]" value="Game" checked="<% game.gameType === "Game" ? "true" : "false" %>"/>
         </fieldset>
         
         <label class="game-input-desc" for="game-field">Field Type</label>
-        <select class="game-input" id="game-field" name="game[fieldType]">
+        <select class="game-input" id="game-field" name="game[fieldType]" required>
             <option value="">--Please choose a field type--</option>
             <option value="Grass" selected="<% game.fieldType === "Grass" ? "true" : "false" %>">Grass</option>
             <option value="Turf" selected="<% game.fieldType === "Turf" ? "true" : "false" %>">Turf</option>

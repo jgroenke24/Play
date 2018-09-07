@@ -384,12 +384,25 @@ footer {
 .btn-comment {
   background: #8bb174;
 }
+.comment-box-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+hr {
+  margin: 1rem 0;
+}
 .comment {
-  /*padding: .5em .5em .5em 2em;*/
   border-bottom: 1px solid #ddd;
+  margin-bottom: 1rem;
+}
+.comment:last-of-type {
+  border: none;
+  margin-bottom: 0;
 }
 .comment-header {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   margin-bottom: 1.25em;
 }
@@ -409,16 +422,15 @@ footer {
 /*}*/
 .comment-author {
   font-weight: 500;
-  flex: 0 0 70%;
+  flex: 0 0 50%;
 }
 .comment-date {
   display: block;
   opacity: .7;
-  flex: 0 0 15%;
+  flex: 0 0 25%;
   text-align: center;
 }
 .comment-text {
-  margin-left: 15%;
   margin-bottom: 1.25em;
 }
 .comment-buttons {
@@ -559,5 +571,17 @@ select.game-input {
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+  .comment-avatar {
+    flex: 0 0 15%;
+  }
+  .comment-author {
+    flex: 0 0 70%;
+  }
+  .comment-date {
+    flex: 0 0 15%;
+  }
+  .comment-text {
+    margin-left: 15%;
   }
 }

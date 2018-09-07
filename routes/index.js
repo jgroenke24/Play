@@ -5,7 +5,9 @@ const router    = express.Router({ mergeParams: true });
 // Import database models
 const User      = require("../models/user");
 const Game      = require("../models/game");
-const Comment   = require("../models/comment");
+
+// Import middleware
+const middleware = require("../middleware");
 
 // Root route
 router.get("/", (req, res) => {
@@ -21,7 +23,7 @@ router.get("/", (req, res) => {
     });
 });
 
-router.get("/dashboard", (req, res) => {
+router.get("/dashboard", middleware.isLoggedIn, (req, res) => {
     // Get all games from db
     Game.find({}, (err, allGames) => {
         if (err) {

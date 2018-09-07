@@ -2,12 +2,14 @@ const express   = require("express");
 const router    = express.Router({ mergeParams: true });
 
 // Import database models
-const User      = require("../models/user");
 const Game      = require("../models/game");
 const Comment   = require("../models/comment");
 
+// Import middleware
+const middleware    = require("../middleware");
+
 // New route - show form to create new comment
-router.get("/games/:id/comments/new", (req, res) => {
+router.get("/games/:id/comments/new", middleware.isLoggedIn, (req, res) => {
     Game.findById(req.params.id, (err, foundGame) => {
         if (err || !foundGame) {
             console.log(err);
@@ -20,7 +22,7 @@ router.get("/games/:id/comments/new", (req, res) => {
 });
 
 // Create route - add new comment to database
-router.post("/games/:id/comments", (req, res) => {
+router.post("/games/:id/comments", middleware.isLoggedIn, (req, res) => {
     // Lookup game using id
     Game.findById(req.params.id, (err, foundGame) => {
         if (err) {
@@ -35,6 +37,12 @@ router.post("/games/:id/comments", (req, res) => {
                     req.flash("error", "Could not create comment.  Please try again.");
                     res.redirect("/games/" + foundGame._id);
                 } else {
+                    // Add username and id to comment
+                    newlyCreatedComment.author = {
+                        id: req.user._id,
+                        username: req.user.username
+                    };
+                    newlyCreatedComment.save();
                     // Connect new comment to game
                     foundGame.comments.push(newlyCreatedComment);
                     foundGame.save();
@@ -48,7 +56,7 @@ router.post("/games/:id/comments", (req, res) => {
 });
 
 // Edit route - edit the comment
-router.get("/games/:id/comments/:comment_id/edit", (req, res) => {
+router.get("/games/:id/comments/:comment_id/edit", middleware.checkCommentOwnership, (req, res) => {
     // First find the game in the database
     Game.findById(req.params.id, (err, foundGame) => {
         if (err || !foundGame) {
@@ -74,7 +82,7 @@ router.get("/games/:id/comments/:comment_id/edit", (req, res) => {
 });
 
 // Update route - update comment with information from edit form
-router.put("/games/:id/comments/:comment_id", (req, res) => {
+router.put("/games/:id/comments/:comment_id", middleware.checkCommentOwnership, (req, res) => {
     Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, (err, result) => {
         if (err) {
             console.log(err);
@@ -88,7 +96,7 @@ router.put("/games/:id/comments/:comment_id", (req, res) => {
 });
 
 // Destroy route - delete comment
-router.delete("/games/:id/comments/:comment_id", (req, res) => {
+router.delete("/games/:id/comments/:comment_id", middleware.checkCommentOwnership, (req, res) => {
     Comment.findByIdAndRemove(req.params.comment_id, (err) => {
         if (err) {
             console.log(err);

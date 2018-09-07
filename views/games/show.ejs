@@ -7,16 +7,18 @@
         
         <div class="info-card">
             <time class="info-item info-time" datetime="<%= game.date.toDateString() %>"><%= moment(game.date).format('LL') %></time>
-                <div class="info-item info-title"><%= game.title %></div>
-                <p class="info-item info-creator"><%= `Created ${moment(game.createdAt).fromNow()} by ${game.creator.username}` %></p>
-                <div class="info-item">Field type: <span class="pill"><%= game.fieldType %></span></div>
-                <div class="info-item">Game type: <span class="pill"><%= game.gameType %></span></div>
-                <div class="info-item info-buttons">
-                <a class="btn btn-edit" href="/games/<%= game._id %>/edit">Edit</a>
-                <form action="/games/<%= game._id %>?_method=DELETE" method="POST">
-                    <button class="btn btn-delete">Delete</button>
-                </form>
+            <div class="info-item info-title"><%= game.title %></div>
+            <p class="info-item info-creator"><%= `Created ${moment(game.createdAt).fromNow()} by ${game.creator.username}` %></p>
+            <div class="info-item">Field type: <span class="pill"><%= game.fieldType %></span></div>
+            <div class="info-item">Game type: <span class="pill"><%= game.gameType %></span></div>
+            <% if (currentUser && game.creator.id.equals(currentUser._id)) { %>
+            <div class="info-item info-buttons">
+            <a class="btn btn-edit" href="/games/<%= game._id %>/edit">Edit</a>
+            <form action="/games/<%= game._id %>?_method=DELETE" method="POST">
+                <button class="btn btn-delete">Delete</button>
+            </form>
             </div>
+            <% } %>
         </div>
         
        <div class="info-card">
@@ -42,13 +44,13 @@
         </div>
         
         <div class="info-card comment-box">
-            <a class="btn btn-comment" href="/games/<%= game._id %>/comments/new">Add new comment</a>
-            <hr>
-            <% if (game.comments.length < 1) { %>
-            <div class="comment-none">
-                No comments
+            <div class="comment-box-top">
+                <p><%= game.comments.length %> comments</p>
+                <a class="btn btn-comment" href="/games/<%= game._id %>/comments/new">Add comment</a>
             </div>
-            <% } else { %>
+            
+            <hr>
+            <% if (game.comments.length > 0) { %>
             <% game.comments.forEach((comment) => { %>
             <div class="comment">
                 <div class="comment-header">
@@ -64,15 +66,17 @@
                 </div>
                 <div class="comment-text">
                     <%= comment.text %>
+                    <% if (currentUser && comment.author.id.equals(currentUser._id)) { %>
                     <div class="comment-buttons">
                         <a class="comment-edit" href="/games/<%= game._id %>/comments/<%= comment._id %>/edit">Edit</a>
                         <form action="/games/<%= game._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
                             <button class="comment-delete">Delete</button>
                         </form>
                     </div>
+                    <% } %>
                 </div>
             </div>
-            <% }); %>
+            <% }) %>
             <% } %>
         </div>
         

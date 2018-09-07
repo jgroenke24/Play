@@ -4,8 +4,11 @@ const router    = express.Router({ mergeParams: true });
 // Import database models
 const Game      = require("../models/game");
 
-// Require geocoder for Google Maps
+// Import geocoder for Google Maps
 const NodeGeocoder = require('node-geocoder');
+
+// Import middleware
+const middleware    = require("../middleware");
  
 let options = {
   provider: 'google',
@@ -31,12 +34,12 @@ router.get("/games", (req, res) => {
 });
 
 // New route - show form to create new game
-router.get("/games/new", (req, res) => {
+router.get("/games/new", middleware.isLoggedIn, (req, res) => {
     res.render("games/new");
 });
 
 // Create route - add new game to database
-router.post("/games", (req, res) => {
+router.post("/games", middleware.isLoggedIn, (req, res) => {
     // Validate user inputs
     let newGame = req.body.game;
     if (!newGame.title || !newGame.address || !newGame.date || !newGame.gameType || !newGame.fieldType || !newGame.date || !newGame.time) {
@@ -44,6 +47,10 @@ router.post("/games", (req, res) => {
         return res.redirect("/games/new");
     }
     newGame.date = new Date(`${newGame.date} ${newGame.time}`);
+    newGame.creator = {
+        id: req.user._id,
+        username: req.user.username
+    };
     // Use geocoder to get latitude and longitude for map
     geocoder.geocode(newGame.address, (err, data) => {
         if (err || !data.length) {
@@ -80,7 +87,7 @@ router.get("/games/:id", (req, res) => {
 });
 
 // Edit route - edit the game info
-router.get("/games/:id/edit", (req, res) => {
+router.get("/games/:id/edit", middleware.checkGameOwnership, (req, res) => {
     Game.findById(req.params.id, (err, foundGame) => {
         if (err || !foundGame) {
             console.log(err);
@@ -93,7 +100,7 @@ router.get("/games/:id/edit", (req, res) => {
 });
 
 // Update route - update game info with information from edit form
-router.put("/games/:id", (req, res) => {
+router.put("/games/:id", middleware.checkGameOwnership, (req, res) => {
     // Validate user inputs
     let editGame = req.body.game;
     if (!editGame.title || !editGame.address || !editGame.date || !editGame.gameType || !editGame.fieldType || !editGame.date || !editGame.time) {
@@ -122,7 +129,7 @@ router.put("/games/:id", (req, res) => {
 });
 
 // Destroy route - delete game
-router.delete("/games/:id", (req, res) => {
+router.delete("/games/:id", middleware.checkGameOwnership, (req, res) => {
     Game.findByIdAndRemove(req.params.id, (err) => {
        if (err) {
            console.log(err);

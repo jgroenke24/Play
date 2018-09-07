@@ -55,15 +55,14 @@
 				<div class="scroll-wrapper">
 					<% games.forEach((game) => { %>
 					<div class="schedule-box">
-						<img src="/images/christian-widell-101891-unsplash.jpg" alt="soccer field">
+						<img src="/images/<%= Math.floor(Math.random() * 4 + 1) %>.jpg" alt="soccer field">
 						<div class="cal-leaf">
-							<span class="month">Aug</span>
-							<span class="day">9</span>
+							<span class="month"><%= moment(game.date).format("MMM") %></span>
+							<span class="day"><%= game.date.getDate() %></span>
 						</div>
 						<div class="schedule-text">
-							<h3><%= game.name %></h3>
-							<h4><%= game.location %></h4>
-							<datetime><%= game.date %></datetime>
+							<datetime><%= moment(game.date).format('LL') %></datetime>
+							<h3><%= game.title %></h3>
 						</div>
 					</div>
 					<% }); %>
