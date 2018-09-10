@@ -3,7 +3,6 @@
 <div class="container">
     <h2 class="title">Add a comment to <%= game.title %></h2>
     <form class="form-game" action="/games/<%= game._id %>/comments" method="post">
-        
         <label class="game-input-desc" for="game-comment">Comment</label>
         <input class="game-input" type="text" id="game-comment" name="comment[text]" placeholder="Your comment..." autofocus required/>
         <button class="btn btn-comment">Submit</button>

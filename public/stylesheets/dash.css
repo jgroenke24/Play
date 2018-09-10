@@ -444,6 +444,7 @@ hr {
   opacity: .7;
   margin-right: 1rem;
   font-weight: 300;
+  cursor: pointer;
 }
 .comment-delete {
   background: none;
@@ -454,17 +455,30 @@ hr {
   text-transform: uppercase;
   cursor: pointer;
 }
+.comment-add {
+  margin-top: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: .25rem;
+}
+.collapse {
+  display: none;
+}
+
 
 /*game form*/
-.form-game {
+.form-game,
+.form-comment {
   display: flex;
   flex-direction: column;
 }
 .form-game input,
-.form-game label {
+.form-game label,
+.form-comment input,
+.form-comment label {
   display: inline-block;
 }
-.game-input-desc {
+.input-desc {
   font-size: 1.15rem;
   padding: 1rem 0;
 }
@@ -495,6 +509,25 @@ select.game-input {
 .game-time .game-input {
   width: 100%;
   color: #777;
+}
+.comment-input {
+  border: 1px solid #aaa;
+  height: 2rem;
+  padding: 0 10px;
+  font: inherit;
+  border-radius: 5px;
+}
+.comment-area {
+  border: 1px solid #aaa;
+  padding: 10px;
+  font: inherit;
+  border-radius: 5px;
+  line-height: 1.25rem;
+}
+.btn-add-comment {
+  margin-top: .25rem;
+  color: #fff;
+  font-weight: 500;
 }
 
 .alert {
@@ -565,6 +598,9 @@ select.game-input {
     justify-content: space-between;
     align-items: center;
   }
+  .comment-text-p {
+    flex: 1 1 auto;
+  }
   .comment-buttons {
     margin: 0;
     flex: 0 0 17.75%;
@@ -583,5 +619,8 @@ select.game-input {
   }
   .comment-text {
     margin-left: 15%;
+  }
+  .comment-edit-form {
+    flex: 1 1 auto;
   }
 }

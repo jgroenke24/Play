@@ -46,9 +46,20 @@
         <div class="info-card comment-box">
             <div class="comment-box-top">
                 <p><%= game.comments.length %> comments</p>
-                <a class="btn btn-comment" href="/games/<%= game._id %>/comments/new">Add comment</a>
+                <span class="btn btn-comment" id="commentCollapser">Add comment</span>
             </div>
-            
+            <!--Start of collapse form-->
+            <div class="comment-add collapse" id="collapseComment">
+                <h4>Write your comment</h4>
+                <form class="form-comment" action="/games/<%= game._id %>/comments" method="post">
+                    <label class="input-desc" for="game-comment-username">Username</label>
+                    <input class="comment-input" type="text" id="game-comment-username" disabled value="<%= currentUser.username %>"/>
+                    <label class="input-desc" for="game-comment">Comment</label>
+                    <textarea class="comment-area" type="text" id="game-comment" name="comment[text]" placeholder="Your comment..." rows="3" autofocus required></textarea>
+                    <button class="btn btn-add-comment btn-comment">Submit</button>
+                </form>
+            </div>
+            <!--End of collapse form-->
             <hr>
             <% if (game.comments.length > 0) { %>
             <% game.comments.forEach((comment) => { %>
@@ -64,17 +75,27 @@
                         <small class="comment-date"><%= moment(comment.createdAt).fromNow() %></small>
                     </div>
                 </div>
+                <% if (currentUser && comment.author.id.equals(currentUser._id)) { %>
                 <div class="comment-text">
-                    <%= comment.text %>
-                    <% if (currentUser && comment.author.id.equals(currentUser._id)) { %>
+                    <p class="comment-text-p" id="collapseEditText<%= comment._id %>"><%= comment.text %></p>
+                    <!--Start of collapse form-->
+                    <div class="collapse comment-edit-form" id="collapseEdit<%= comment._id %>">
+                        <form class="form-comment" action="/games/<%= game._id %>/comments/<%= comment._id %>?_method=PUT" method="post">
+                                <textarea class="comment-area" type="text" id="game-comment" name="comment[text]" rows="2" autofocus required><%= comment.text %></textarea>
+                                <button class="btn btn-add-comment btn-comment">Edit</button>
+                        </form>
+                    </div>
+                    <!--End of collapse form-->
                     <div class="comment-buttons">
-                        <a class="comment-edit" href="/games/<%= game._id %>/comments/<%= comment._id %>/edit">Edit</a>
+                        <span class="comment-edit" id="editCollapser" onclick="editComment('<%= comment._id %>')">Edit</span>
                         <form action="/games/<%= game._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
                             <button class="comment-delete">Delete</button>
                         </form>
                     </div>
-                    <% } %>
                 </div>
+                <% } else { %>
+                <div class="comment-text"><p><%= comment.text %></p></div>
+                <% } %>
             </div>
             <% }) %>
             <% } %>
@@ -83,6 +104,20 @@
     </div>
     
 </section>
+
+<script>
+    const commentCollapser = document.querySelector("#commentCollapser");
+    const collapseComment = document.querySelector("#collapseComment");
+    commentCollapser.addEventListener("click", function(e) {
+        collapseComment.classList.toggle("collapse");
+    });
+    
+    function editComment(id) {
+        document.querySelector(`#collapseEditText${id}`).classList.toggle("collapse");
+        document.querySelector(`#collapseEdit${id}`).classList.toggle("collapse");
+        
+    };
+</script>
 
 <script>
     function initMap() {

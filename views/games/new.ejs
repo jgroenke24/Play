@@ -4,16 +4,16 @@
     <h2 class="title">Add a new game</h2>
     <form class="form-game" action="/games" method="post">
         
-        <label class="game-input-desc" for="game-title">Game Title</label>
+        <label class="input-desc" for="game-title">Game Title</label>
         <input class="game-input" type="text" id="game-title" name="game[title]" placeholder="Enter a short title for the game (up to 40 characters)" required/>
         
-        <label class="game-input-desc" for="game-address">Address</label>
+        <label class="input-desc" for="game-address">Address</label>
         <input class="game-input" type="text" id="game-address" name="game[address]" placeholder="Enter the address of the field (or one nearby)" required/>
         
         <!--Date/time inputs-->
         <div class="game-datetime">
             <div class="nativeDatePicker game-date">
-                <label class="game-input-desc" for="game-date">Date</label>
+                <label class="input-desc" for="game-date">Date</label>
                 <input class="game-input" type="date" id="game-date" name="game[date]" required>
             </div>
             <p class="fallbackDateLabel">Date</p>
@@ -48,7 +48,7 @@
             </div>
             
             <div class="nativeTimePicker game-time">
-                <label class="game-input-desc" for="game-time">Time</label>
+                <label class="input-desc" for="game-time">Time</label>
                 <input class="game-input" id="game-time" type="time" name="game[time]" required>
             </div>
             <p class="fallbackTimeLabel">Time</p>
@@ -70,7 +70,7 @@
         <!--End of date/time inputs-->
         
         <fieldset>
-            <legend class="game-input-desc">Game Type</legend>
+            <legend class="input-desc">Game Type</legend>
             
             <label for="game-type1">Pickup</label>
             <input type="radio" id="game-type1" name="game[gameType]" value="Pickup" checked required/>
@@ -79,7 +79,7 @@
             <input type="radio" id="game-type2" name="game[gameType]" value="Game"/>
         </fieldset>
         
-        <label class="game-input-desc" for="game-field">Field Type</label>
+        <label class="input-desc" for="game-field">Field Type</label>
         <select class="game-input" id="game-field" name="game[fieldType]" required>
             <option value="">--Please choose a field type--</option>
             <option value="Grass">Grass</option>
