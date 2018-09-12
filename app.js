@@ -13,11 +13,13 @@ const LocalStrategy    = require("passport-local");
 const User             = require("./models/user");
 const Game             = require("./models/game");
 const Comment          = require("./models/comment");
+const Discussion       = require("./models/discussion");
 
 // Import routes
 const indexRoutes      = require("./routes/index");
 const gameRoutes       = require("./routes/games");
 const commentRoutes    = require("./routes/comments");
+const discussionRoutes = require("./routes/discussions");
 
 // Import database seed
 const seedDB           = require("./seeds");
@@ -59,5 +61,6 @@ app.use((req, res, next) => {
 app.use(indexRoutes);
 app.use(gameRoutes);
 app.use(commentRoutes);
+app.use(discussionRoutes);
 
 app.listen(process.env.PORT, process.env.IP,() => console.log("Play! Server Started"));

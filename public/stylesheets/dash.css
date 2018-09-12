@@ -515,6 +515,12 @@ hr {
   padding: 0 10px;
   font: inherit;
 }
+.game-input-area {
+  border: none;
+  padding: 10px;
+  font: inherit;
+  line-height: 1.5rem;
+}
 select.game-input {
   color: #777;
 }
