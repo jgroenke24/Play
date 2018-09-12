@@ -2,8 +2,14 @@
        
         </div>
         
+        <% if (typeof page !== "undefined" && page === "game-form") { %>
         <script type="text/javascript" src="/scripts/dates.js"></script>
         <script type="text/javascript" src="/scripts/times.js"></script>
+        <% } %>
+        
+        <% if (typeof page !== "undefined" && page === "game-show") { %>
+        <script type="text/javascript" src="/scripts/game.js"></script>
+        <% } %>
         <script type="text/javascript" src="/scripts/scripts.js"></script>
     </body>
 </html>

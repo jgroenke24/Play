@@ -36,7 +36,7 @@ router.get("/games", middleware.isLoggedIn, (req, res) => {
 
 // New route - show form to create new game
 router.get("/games/new", middleware.isLoggedIn, (req, res) => {
-    res.render("games/new");
+    res.render("games/new", { page: "game-form" });
 });
 
 // Create route - add new game to database
@@ -84,7 +84,7 @@ router.get("/games/:id", middleware.isLoggedIn, (req, res) => {
             req.flash("error", "Could not find information on that game.  Please try again.");
             res.redirect("/games");
         } else {
-            res.render("games/show", { game: foundGame });
+            res.render("games/show", { game: foundGame, page: "game-show" });
         }
     });
 });
@@ -97,7 +97,7 @@ router.get("/games/:id/edit", middleware.checkGameOwnership, (req, res) => {
             req.flash("error", "Could not find information on that game.  Please try again.");
             res.redirect("/games");
         } else {
-            res.render("games/edit", { game: foundGame });
+            res.render("games/edit", { game: foundGame, page: "game-form" });
         }
     });
 });
