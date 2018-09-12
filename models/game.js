@@ -24,11 +24,12 @@ let gameSchema = new mongoose.Schema({
         }
     ],
     playersGoing: [
-        {
-            id: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: "User"
-            },
+        {   
+            id:
+                {
+                    type: mongoose.Schema.Types.ObjectId,
+                    ref: "User"
+                },
             username: String
         }
     ]

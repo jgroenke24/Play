@@ -3,6 +3,7 @@ const router    = express.Router({ mergeParams: true });
 
 // Import database models
 const Game      = require("../models/game");
+const User      = require("../models/user");
 
 // Import geocoder for Google Maps
 const NodeGeocoder = require('node-geocoder');
@@ -20,7 +21,7 @@ let options = {
 let geocoder = NodeGeocoder(options);
 
 // Index route - show all games
-router.get("/games", (req, res) => {
+router.get("/games", middleware.isLoggedIn, (req, res) => {
     // Get all games from db
     Game.find({}, (err, allGames) => {
         if (err) {
@@ -66,6 +67,8 @@ router.post("/games", middleware.isLoggedIn, (req, res) => {
                 req.flash("error", "Could not create your game.  Please try again.");
                 res.redirect("/games/new");
             } else {
+                newlyCreatedGame.playersGoing.push(req.user);
+                newlyCreatedGame.save();
                 req.flash("success", "Game created.");
                 res.redirect("/games");
             }
@@ -74,8 +77,8 @@ router.post("/games", middleware.isLoggedIn, (req, res) => {
 });
 
 // Show route - show more info about a game
-router.get("/games/:id", (req, res) => {
-    Game.findById(req.params.id).populate("comments").exec((err, foundGame) => {
+router.get("/games/:id", middleware.isLoggedIn, (req, res) => {
+    Game.findById(req.params.id).populate("comments").populate("users").exec((err, foundGame) => {
         if (err || !foundGame) {
             console.log(err);
             req.flash("error", "Could not find information on that game.  Please try again.");
@@ -139,6 +142,56 @@ router.delete("/games/:id", middleware.checkGameOwnership, (req, res) => {
            req.flash("success", "Game deleted.");
            res.redirect("/games");
        }
+    });
+});
+
+router.get("/games/:id/get-players", (req, res) => {
+    console.log("player route!");
+    Game.findById(req.params.id, "playersGoing -_id", (err, players) => {
+        if (err || !players) {
+            console.log(err);
+            req.flash("error", "Something went wrong. Please try again.");
+        } else {
+            res.send(players.playersGoing);
+        }
+    });
+});
+
+router.post("/games/:id/add-player", (req, res) => {
+    console.log("add route");
+    User.findById(req.body.user, (err, foundUser) => {
+        if (err || !foundUser) {
+            console.log(err);
+        } else {
+            Game.findById(req.params.id, (err, foundGame) => {
+                if (err || !foundGame) {
+                    console.log(err);
+                } else {
+                    foundGame.playersGoing.push(foundUser);
+                    foundGame.save();
+                    res.sendStatus(200);
+                }
+            });
+        }
+    });
+});
+
+router.post("/games/:id/remove-player", (req, res) => {
+    console.log("remove route!");
+    User.findById(req.body.user, (err, foundUser) => {
+        if (err || !foundUser) {
+            console.log(err);
+        } else {
+            Game.findById(req.params.id, (err, foundGame) => {
+                if (err || !foundGame) {
+                    console.log(err);
+                } else {
+                    foundGame.playersGoing = foundGame.playersGoing.filter(player => player.username !== foundUser.username);
+                    foundGame.save();
+                    res.sendStatus(200);
+                }
+            });
+        }
     });
 });
 

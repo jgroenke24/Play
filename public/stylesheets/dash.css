@@ -342,15 +342,42 @@ footer {
   min-height: 200px;
   flex: 1 1 auto;
 }
-.info-players p {
-  font-size: 1.25em;
+.info-players-header {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
   margin-bottom: 12px;
+  font-size: 1.25rem;
+}
+.info-players-header button {
+  border: 1px solid #8bb174;
+  color: #8bb174;
+  border-radius: 5px;
 }
 .info-player {
   padding: 12px 10px;
 }
 .info-player:nth-child(even) {
   background-color: rgba(0,0,0,0.05);
+}
+.info-players-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #ddd;
+  padding: .75rem 0;
+}
+.info-players-footer button {
+  border-radius: 50%;
+  border: 1px solid #8bb174;
+  color: #8bb174;
+  height: 2rem;
+  width: 2rem;
+  cursor: pointer;
+}
+.info-players-footer .selected {
+  background: #8bb174;
+  color: #fff;
 }
 .pill {
   color: #fff;
