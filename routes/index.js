@@ -3,8 +3,9 @@ const passport  = require("passport");
 const router    = express.Router({ mergeParams: true });
 
 // Import database models
-const User      = require("../models/user");
-const Game      = require("../models/game");
+const User          = require("../models/user");
+const Game          = require("../models/game");
+const Discussion    = require("../models/discussion")
 
 // Import middleware
 const middleware = require("../middleware");
@@ -31,7 +32,14 @@ router.get("/dashboard", middleware.isLoggedIn, (req, res) => {
             req.flash("error", "Something went wrong.  Please try again.");
             res.redirect("/");
         } else {
-            res.render("dashboard", { games: allGames });
+            Discussion.find({}, (err, allDisc) => {
+                if (err) {
+                    req.flash("error", "Something went wrong.  Please try again.");
+                    res.redirect("/");
+                } else {
+                    res.render("dashboard", { games: allGames, discs: allDisc });
+                }
+            });
         }
     });
 });

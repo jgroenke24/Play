@@ -13,7 +13,7 @@
                     <span class="day"><%= game.date.getDate() %></span>
                 </div>
                 <div class="schedule-text">
-                    <datetime><%= moment(game.date).format('LL') %></datetime>
+                    <time><%= moment(game.date).format('LL') %></time>
                     <h3><%= game.title %></h3>
                     <h4><%= `Created by ${game.creator.username}` %></h4>
                 </div>
@@ -35,10 +35,35 @@
                 <span class="day"><%= game.date.getDate() %></span>
             </div>
             <div class="schedule-text">
-                <datetime><%= moment(game.date).format('LL') %></datetime>
+                <time><%= moment(game.date).format('LL') %></time>
                 <h3><%= game.title %></h3>
                 <h4><%= `Created by ${game.creator.username}` %></h4>
             </div>
+        </div>
+        <% }); %>
+    </div>
+</section>
+
+<!--Discussions Section-->
+<section class="container">
+    <h2>Discussions...</h2>
+    <div class="discussion-wrapper">
+        <% discs.forEach((disc) => { %>
+        <div class="discussion-box">
+            <a href="/discussions/<%= disc._id %>">
+                <h4><%= disc.title %></h4>
+                <div class="discussion-info">
+                    <time datetime="<%= moment(disc.createdAt).format('YYYY-MM-DD') %>"><%= moment(disc.createdAt).format('L') %></time>
+                    at 
+                    <time datetime="<%= moment(disc.createdAt).format('HH:MM') %>"><%= moment(disc.createdAt).format('LT') %></time>
+                    <em>·</em>
+                    <%= disc.creator.username %>
+                </div>
+                <div class="discussion-extra">
+                    <i class="fas fa-comment-alt"></i>
+                    <%= disc.comments.length %>
+                </div>
+            </a>
         </div>
         <% }); %>
     </div>
