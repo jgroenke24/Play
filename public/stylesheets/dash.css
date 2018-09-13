@@ -288,6 +288,7 @@ a {
   flex: 1 1 auto;
   padding: .75rem;
   height: 140px;
+  margin-bottom: .5rem;
 }
 .discussion-box a {
   color: #1c5253;

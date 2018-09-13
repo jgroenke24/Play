@@ -39,4 +39,16 @@ router.post("/discussions", middleware.isLoggedIn, (req, res) => {
     });
 });
 
+// Show route - show more info about a discussion
+router.get("/discussions/:id", middleware.isLoggedIn, (req, res) => {
+    Discussion.findById(req.params.id).populate("comments").populate("users").exec((err, foundDiscussion) => {
+        if (err || !foundDiscussion) {
+            req.flash("error", "Could not find information on that discussion.  Please try again.");
+            res.redirect("/dashboard");
+        } else {
+            res.render("discussions/show", { discussion: foundDiscussion });
+        }
+    });
+});
+
 module.exports = router;
