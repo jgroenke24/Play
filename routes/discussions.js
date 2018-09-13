@@ -16,7 +16,6 @@ router.get("/discussions/new", middleware.isLoggedIn, (req, res) => {
 
 // Create route - add new discussion to database
 router.post("/discussions", middleware.isLoggedIn, (req, res) => {
-    console.log(req.body.disc);
     let newDisc = req.body.disc;
     // Validate user inputs
     if (!newDisc.title || !newDisc.text) {
@@ -46,7 +45,7 @@ router.get("/discussions/:id", middleware.isLoggedIn, (req, res) => {
             req.flash("error", "Could not find information on that discussion.  Please try again.");
             res.redirect("/dashboard");
         } else {
-            res.render("discussions/show", { discussion: foundDiscussion });
+            res.render("discussions/show", { discussion: foundDiscussion, page: "discussion-show" });
         }
     });
 });

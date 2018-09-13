@@ -1,1 +1,104 @@
-<h1>discussions show page</h1>
+<% include ../partials/header %>
+
+<!--show Section-->
+<section class="container">
+    
+    <div class="grid">
+        
+        <div class="info-card comment-box">
+            <div class="discussion-info-top discussion-extra">
+                <i class="fas fa-comment-alt"></i>
+                <%= discussion.comments.length %>
+            </div>
+            <h2 class="info-item"><%= discussion.title %></h2>
+        </div>
+        
+        <div class="info-card comment-box">
+            <div class="discussion-post-top">
+                <h3 class="info-item">Post</h3>
+                <p class="info-item"><%= moment(discussion.createdAt).fromNow() %></p>
+            </div>
+            <p class="discussion-post-body"><%= discussion.text %></p>
+            <div class="discussion-post-bottom">
+                <div class="discussion-creator">
+                    <div class="discussion-creator-avatar comment-avatar">
+                        <img src="/images/avatar.png"></img>
+                    </div>
+                    <div class="comment-author">
+                        <p><%= discussion.creator.username %></p>
+                    </div>
+                </div>
+                <% if (currentUser && discussion.creator.id.equals(currentUser._id)) { %>
+                <div class="discussion-buttons">
+                    <a class="btn btn-edit" href="/discussions/<%= discussion._id %>/edit">Edit</a>
+                    <form action="/discussions/<%= discussion._id %>?_method=DELETE" method="POST">
+                        <button class="btn btn-delete">Delete</button>
+                    </form>
+                </div>
+                <% } %>
+            </div>
+        </div>
+        
+        <div class="info-card comment-box">
+            <div class="comment-box-top">
+                <p><%= discussion.comments.length %> comments</p>
+                <span class="btn btn-comment" id="commentCollapser">Add comment</span>
+            </div>
+            <!--Start of collapse form-->
+            <div class="comment-add collapse" id="collapseComment">
+                <h4>Write your comment</h4>
+                <form class="form-comment" action="/discussions/<%= discussion._id %>/comments" method="post">
+                    <label class="input-desc" for="game-comment-username">Username</label>
+                    <input class="comment-input" type="text" id="game-comment-username" disabled value="<%= currentUser.username %>"/>
+                    <label class="input-desc" for="game-comment">Comment</label>
+                    <textarea class="comment-area" type="text" id="game-comment" name="comment[text]" placeholder="Your comment..." rows="3" autofocus required></textarea>
+                    <button class="btn btn-add-comment btn-comment">Submit</button>
+                </form>
+            </div>
+            <!--End of collapse form-->
+            <hr>
+            <% if (discussion.comments.length > 0) { %>
+            <% discussion.comments.forEach((comment) => { %>
+            <div class="comment">
+                <div class="comment-header">
+                    <div class="comment-avatar">
+                        <img src="/images/avatar.png"></img>
+                    </div>
+                    <div class="comment-author">
+                        <p><%= comment.author.username %></p>
+                    </div>
+                    <div class="comment-date">
+                        <small class="comment-date"><%= moment(comment.createdAt).fromNow() %></small>
+                    </div>
+                </div>
+                <% if (currentUser && comment.author.id.equals(currentUser._id)) { %>
+                <div class="comment-text">
+                    <p class="comment-text-p" id="collapseEditText<%= comment._id %>"><%= comment.text %></p>
+                    <!--Start of collapse form-->
+                    <div class="collapse comment-edit-form" id="collapseEdit<%= comment._id %>">
+                        <form class="form-comment" action="/discussions/<%= discussion._id %>/comments/<%= comment._id %>?_method=PUT" method="post">
+                            <textarea class="comment-area" type="text" id="game-comment" name="comment[text]" rows="2" autofocus required><%= comment.text %></textarea>
+                            <button class="btn btn-add-comment btn-comment">Edit</button>
+                        </form>
+                    </div>
+                    <!--End of collapse form-->
+                    <div class="comment-buttons">
+                        <span class="comment-edit" id="editCollapser" onclick="editComment('<%= comment._id %>')">Edit</span>
+                        <form action="/discussions/<%= discussion._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
+                            <button class="comment-delete">Delete</button>
+                        </form>
+                    </div>
+                </div>
+                <% } else { %>
+                <div class="comment-text"><p><%= comment.text %></p></div>
+                <% } %>
+            </div>
+            <% }) %>
+            <% } %>
+        </div>
+        
+    </div>
+    
+</section>
+
+<% include ../partials/footer %>

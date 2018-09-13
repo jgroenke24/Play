@@ -300,8 +300,47 @@ a {
   color: #aaa;
   margin: .75rem 0;
 }
+.discussion-info-top {
+  display: flex;
+  justify-content: flex-end;
+}
 .discussion-extra {
   color: #777;
+}
+.discussion-extra i {
+  margin-right: .5rem;
+}
+h2.info-item {
+  margin: 0 auto;
+}
+.discussion-post-top {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  border-bottom: 1px solid #ddd;
+}
+.discussion-post-body {
+  margin: 2rem 0;
+  padding: 0 2rem;
+}
+.discussion-post-bottom {
+  padding: 1rem 0;
+  border-top: 1px solid #ddd;
+}
+.discussion-buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+.discussion-buttons > a {
+  margin-right: 1rem;
+}
+.discussion-creator {
+  display: flex;
+  align-items: center;
+}
+.discussion-creator-avatar {
+  margin-right: 1rem;
 }
 
 /*Typography*/
@@ -432,6 +471,7 @@ footer {
   color: #000;
   cursor: pointer;
   text-align: center;
+  max-height: 32px;
 }
 .btn a {
   color: #000;
@@ -689,5 +729,13 @@ select.game-input {
   }
   .comment-edit-form {
     flex: 1 1 auto;
+  }
+  .discussion-post-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+  }
+  .discussion-buttons {
+    margin: 0;
   }
 }
