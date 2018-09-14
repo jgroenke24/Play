@@ -1,13 +1,25 @@
 <% include ../partials/header %>
 
+<% if (typeof route !== undefined && route === "games") { %>
 <div class="container">
     <h2 class="title">Edit comment for <%= game.title %></h2>
     <form class="form-game" action="/games/<%= game._id %>/comments/<%= comment._id %>?_method=PUT" method="post">
-        
-        <label class="game-input-desc" for="game-comment">Comment</label>
+        <label class="input-desc" for="game-comment">Comment</label>
         <input class="game-input" type="text" id="game-comment" name="comment[text]" value="<%= comment.text %>" autofocus required/>
         <button class="btn btn-comment">Submit</button>
     </form>
 </div>
+<% } %>
+
+<% if (typeof route !== undefined && route === "discussions") { %>
+<div class="container">
+    <h2 class="title">Edit comment for <%= discussion.title %></h2>
+    <form class="form-game" action="/discussions/<%= discussion._id %>/comments/<%= comment._id %>?_method=PUT" method="post">
+        <label class="input-desc" for="game-comment">Comment</label>
+        <input class="game-input" type="text" id="game-comment" name="comment[text]" value="<%= comment.text %>" autofocus required/>
+        <button class="btn btn-comment">Submit</button>
+    </form>
+</div>
+<% } %>
 
 <% include ../partials/footer %>
