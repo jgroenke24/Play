@@ -1,0 +1,14 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <h2 class="title">Edit your discussion</h2>
+    <form class="form-game" action="/discussions/<%= discussion._id %>?_method=PUT" method="post">
+        <label class="input-desc" for="disc-title">Title</label>
+        <input class="game-input" type="text" id="disc-title" name="disc[title]" value="<%= discussion.title %>" autofocus required/>
+        <label class="input-desc" for="disc-post">Post</label>
+        <textarea class="game-input-area" type="text" id="disc-post" name="disc[text]" rows="5" required><%= discussion.text %></textarea>
+        <button class="btn btn-comment">Submit</button>
+    </form>
+</div>
+
+<% include ../partials/footer %>

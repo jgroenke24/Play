@@ -50,4 +50,49 @@ router.get("/discussions/:id", middleware.isLoggedIn, (req, res) => {
     });
 });
 
+// Edit route - edit the discussion info
+router.get("/discussions/:id/edit", middleware.checkDiscussionOwnership, (req, res) => {
+    Discussion.findById(req.params.id, (err, foundDiscussion) => {
+        if (err || !foundDiscussion) {
+            req.flash("error", "Could not find information on that discussion.  Please try again.");
+            res.redirect("/dashboard");
+        } else {
+            res.render("discussions/edit", { discussion: foundDiscussion });
+        }
+    });
+});
+
+// Update route - update discussion info from edit form
+router.put("/discussions/:id", middleware.checkDiscussionOwnership, (req, res) => {
+    // Validate user input
+    let editDisc = req.body.disc;
+    if (!editDisc.title || !editDisc.text) {
+        req.flash("error", "One or more inputs were invalid.  Please try again.");
+        return res.redirect("/discussions/" + req.params.id);
+    }
+    // Update discussion
+    Discussion.findByIdAndUpdate(req.params.id, editDisc, (err, result) => {
+        if (err) {
+            req.flash("error", "Something went wrong.  Please try again.");
+            res.redirect("/discussions/" + req.params.id);
+        } else {
+            req.flash("succes", "Discussion updated.");
+            res.redirect("/discussions/" + req.params.id);
+        }
+    });
+});
+
+// Destroy route - delete discussion
+router.delete("/discussions/:id", middleware.checkDiscussionOwnership, (req, res) => {
+    Discussion.findByIdAndRemove(req.params.id, (err) => {
+        if (err) {
+            req.flash("error", "Something went wrong.  Please try again.");
+            res.redirect("/dashboard");
+        } else {
+            req.flash("success", "Discussion deleted.");
+            res.redirect("/dashboard");
+        }
+    });
+});
+
 module.exports = router;
